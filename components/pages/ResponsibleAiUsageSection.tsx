@@ -10,32 +10,32 @@ import GuidelineCard from '../ui/GuidelineCard';
 const ResponsibleAiUsageSection = () => {
     const guidelines = [
         {
-            icon: 'brain-line',
+            emoji: '🧠',
             title: 'Pense criticamente e mantenha-se curioso.',
             description: 'Não deixe que a IA decida por si. Pode dar respostas incorretas ou baseadas em preconceitos.'
         },
         {
-            icon: 'shield-check-line',
+            emoji: '🛡️',
             title: 'Seja claro sobre quando usa IA.',
             description: 'Reconhecer o uso da IA é sinal de transparência e honestidade.'
         },
         {
-            icon: 'user-heart-line',
+            emoji: '❤️',
             title: 'Respeite os outros ao usar IA.',
             description: 'Use a IA para colaborar, não para espalhar desinformação ou ludibriar.'
         },
         {
-            icon: 'lock-password-line',
+            emoji: '🔒',
             title: 'Proteja a sua privacidade.',
             description: 'Nunca introduza dados pessoais, senhas ou informações confidenciais na IA.'
         },
         {
-            icon: 'megaphone-line',
+            emoji: '📢',
             title: 'Avise se vir algo preocupante.',
             description: 'Se encontrar conteúdo inapropriado, use a opção "denunciar" na página da IA.'
         },
         {
-            icon: 'book-copy-line',
+            emoji: '✍️',
             title: 'Use a IA para aprender, não para copiar.',
             description: 'Valorize sempre o seu pensamento e as suas palavras.'
         },
