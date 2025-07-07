@@ -33,7 +33,16 @@ export const usePromptFactoryData = () => {
                     .from('recipes')
                     .select('*');
                 if (recError) throw recError;
-                if (recData) setRecipes(recData as Recipe[]);
+                if (recData) {
+                    const mapped = recData.map((r: any) => {
+                        const { category_id, ...rest } = r;
+                        return {
+                            ...rest,
+                            categoryId: category_id,
+                        };
+                    });
+                    setRecipes(mapped as Recipe[]);
+                }
 
                 setError(null);
             } catch (err: any) {
