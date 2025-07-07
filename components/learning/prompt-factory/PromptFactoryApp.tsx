@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 import React, { useState, useCallback } from 'react';
-import { categories, recipes } from '../../../data/prompt-factory-data';
 import type { Category, Recipe } from '../../../types/prompt-factory';
+import usePromptFactoryData from '../../../hooks/usePromptFactoryData';
 import { api } from '../../../services/prompt-factory-api';
 import { useGamification } from '../../../hooks/useGamification';
 import ProgressBar from './ProgressBar';
@@ -19,6 +19,7 @@ import GamificationNotification from './GamificationNotification';
 type Step = 'category' | 'recipe' | 'create' | 'result';
 
 const PromptFactoryApp = () => {
+    const { categories, recipes, isLoading: isDataLoading } = usePromptFactoryData();
     const [currentStep, setCurrentStep] = useState<Step>('category');
     const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
     const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
@@ -101,6 +102,9 @@ const PromptFactoryApp = () => {
 
 
     const renderStep = () => {
+        if (isDataLoading) {
+            return <p className="text-center">A carregar...</p>;
+        }
         switch (currentStep) {
             case 'category':
                 return <CategorySelector categories={categories} onSelectCategory={handleSelectCategory} />;
