@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 import React, { StrictMode } from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom-client';
 import App from './components/App';
 import './index.css';
 
