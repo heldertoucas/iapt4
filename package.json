@@ -1,5 +1,5 @@
 {
-  "name": "v4-ia-para-todos-(react-spa)",
+  "name": "v4-ia-para-todos-react-spa",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,15 +10,15 @@
   },
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom/client": "19.0.0-rc-f994737d14-20240522",
+    "react-dom": "^19.1.0",
     "@google/genai": "latest",
     "marked": "latest",
-    "@supabase/supabase-js": "latest",
-    "react-dom": "^19.1.0"
+    "@supabase/supabase-js": "latest"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
-    "typescript": "~5.7.2",
-    "vite": "^6.2.0"
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0"
   }
 }
