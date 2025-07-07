@@ -30,20 +30,25 @@ export const useGamification = () => {
         try {
             localStorage.setItem(POINTS_KEY, points.toString());
             if (points >= GOAL) {
+                if (!isMedalUnlocked) {
+                    console.log('[GAMIFICATION_DEBUG] Medal unlocked!');
+                }
                 setIsMedalUnlocked(true);
             }
         } catch (error) {
             console.error("Could not save points to localStorage", error);
         }
-    }, [points]);
+    }, [points, isMedalUnlocked]);
 
     const addPoint = () => {
         setPoints(prevPoints => {
             if (prevPoints >= GOAL) {
                 return prevPoints;
             }
-            
+
             const newPoints = prevPoints + 1;
+
+            console.log(`[GAMIFICATION_DEBUG] Added point. New total: ${newPoints}`);
 
             if (newPoints === 1) {
                 setNotification("Começou a sua jornada! Continue a gerar para chegar aos 15 pontos e desbloquear a sua medalha.");

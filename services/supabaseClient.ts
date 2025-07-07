@@ -9,6 +9,8 @@ const supabaseUrl = getApiKey('SUPABASE_URL');
 const supabaseAnonKey = getApiKey('SUPABASE_ANON_KEY');
 
 const createSupabaseClient = () => {
+    console.log(`[API_KEY_DEBUG] Supabase URL: ${supabaseUrl}`);
+    console.log(`[API_KEY_DEBUG] Supabase Anon Key (first 5 chars): ${supabaseAnonKey.slice(0,5)}...`);
     // First, check if the keys are missing or are still placeholders.
     if (!supabaseUrl || !supabaseAnonKey || supabaseUrl.includes('COLOQUE') || supabaseAnonKey.includes('COLOQUE')) {
         console.warn("Supabase credentials are not configured correctly. The app will use fallback content.");
