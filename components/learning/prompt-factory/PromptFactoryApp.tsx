@@ -14,6 +14,7 @@ import PromptBuilder from './PromptBuilder';
 import GenerationResult from './GenerationResult';
 import PointsTracker from './PointsTracker';
 import GamificationNotification from './GamificationNotification';
+import MedalPopup from './MedalPopup';
 
 
 type Step = 'category' | 'recipe' | 'create' | 'result';
@@ -133,14 +134,17 @@ const PromptFactoryApp = () => {
 
     return (
         <div className="bg-pcd-card-bg p-6 md:p-8 rounded-2xl shadow-lg border-t-2 border-pcd-accent-light min-h-[600px] flex flex-col">
-            {notification &&
+            {notification && isMedalUnlocked && notification.includes('Mestre de Prompts') && (
+                <MedalPopup message={notification} onClose={dismissNotification} />
+            )}
+            {notification && !(isMedalUnlocked && notification.includes('Mestre de Prompts')) && (
                 <div className="mb-8">
                     <GamificationNotification
                         message={notification}
                         onClose={dismissNotification}
                     />
                 </div>
-            }
+            )}
             <div className="flex justify-between items-center">
                 <div className="w-1/2">
                     <ProgressBar currentStep={currentStep} onStepClick={handleStepClick} />
