@@ -24,11 +24,12 @@ const GenerationResult = ({ recipe, finalPrompt, generatedOutput, isLoading, onR
     const [advancedTip] = useState(recipe.advanced_tips[Math.floor(Math.random() * recipe.advanced_tips.length)]);
     const [showSlowLoadMessage, setShowSlowLoadMessage] = useState(false);
     const resultBoxRef = useRef<HTMLDivElement>(null);
+    const wasLoading = useRef(isLoading);
     
     useEffect(() => {
-        if (!isLoading && generatedOutput) {
+        if (wasLoading.current && !isLoading && generatedOutput) {
             onGenerationSuccess();
-             // Wrap confetti in a timeout to ensure the DOM is painted
+            // Wrap confetti in a timeout to ensure the DOM is painted
             setTimeout(() => {
                 if (resultBoxRef.current && typeof confetti === 'function') {
                     const rect = resultBoxRef.current.getBoundingClientRect();
@@ -44,6 +45,7 @@ const GenerationResult = ({ recipe, finalPrompt, generatedOutput, isLoading, onR
                 }
             }, 100);
         }
+        wasLoading.current = isLoading;
     }, [isLoading, generatedOutput, onGenerationSuccess]);
 
     useEffect(() => {
