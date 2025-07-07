@@ -58,7 +58,8 @@ const Footer = ({ onShowAllResources }: FooterProps) => {
                     <p className="text-gray-400 text-base mb-2">&copy; {currentYear} IA para Todos. Conteúdo sob licença Creative Commons.</p>
                     <p className="text-gray-400 text-base">Uma iniciativa do Programa Municipal para a Literacia em Inteligência Artificial da Câmara Municipal de Lisboa.</p>
                 </div>
-            </footer>
+            </div>
+        </footer>
     );
 };
 
