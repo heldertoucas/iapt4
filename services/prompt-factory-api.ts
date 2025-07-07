@@ -159,8 +159,8 @@ export const api = {
         }
 
         const { error } = await supabase.rpc('increment_recipe_rating', {
-            recipe_id_in: recipeId,
-            rating_value: rating
+            recipe_id: recipeId,
+            rating_value: rating,
         });
 
         if (error) {

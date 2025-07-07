@@ -2,7 +2,7 @@
 <html lang="pt-PT">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <!-- Favicon removed to avoid 404 errors -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IA para Todos | Um Manifesto para uma IA Humana</title>
   <meta name="description" content="Junte-se ao movimento por uma IA acessível, transparente e ética que beneficie todos." />
@@ -14,6 +14,17 @@
   
   <!-- Remix Icon Library -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <!-- Suppress Tailwind CDN warning -->
+  <script>
+    (function() {
+      const originalWarn = console.warn;
+      console.warn = function(msg, ...args) {
+        if (typeof msg === 'string' && msg.includes('cdn.tailwindcss.com')) return;
+        originalWarn.call(console, msg, ...args);
+      };
+    })();
+  </script>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
