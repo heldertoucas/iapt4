@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IA para Todos | Um Manifesto para uma IA Humana</title>
+  <meta name="description" content="Junte-se ao movimento por uma IA acessível, transparente e ética que beneficie todos." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Remix Icon Library -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- App specific styles -->
+  <link rel="stylesheet" href="index.css">
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: { 
+                  'sans': ['Inter', 'sans-serif'], 
+                  'lexend': ['Lexend', 'sans-serif'] 
+                },
+                colors: {
+                    'pcd-page-bg': 'var(--pcd-page-bg)', 
+                    'pcd-card-bg': 'var(--pcd-card-bg)',
+                    'pcd-bg-soft': 'var(--pcd-bg-soft)', 
+                    'pcd-border': 'var(--pcd-border)',
+                    'pcd-text-dark': 'var(--pcd-text-dark)', 
+                    'pcd-text-light': 'var(--pcd-text-light)',
+                    'pcd-blue': 'var(--pcd-blue)', 
+                    'pcd-roxo': 'var(--pcd-roxo)', 
+                    'pcd-green': 'var(--pcd-green)',
+                    'pcd-pink': 'var(--pcd-pink)',
+                    'pcd-orange': 'var(--pcd-orange)',
+                    'pcd-blue-light': 'var(--pcd-blue-light)', 
+                    'pcd-roxo-light': 'var(--pcd-roxo-light)',
+                    'pcd-green-light': 'var(--pcd-green-light)',
+                    'pcd-pink-light': 'var(--pcd-pink-light)',
+                    'pcd-orange-light': 'var(--pcd-orange-light)',
+
+                    /* Theming Accent Colors */
+                    'pcd-accent': 'var(--pcd-accent-color)',
+                    'pcd-accent-light': 'var(--pcd-accent-light-color)',
+                },
+                borderRadius: { '4xl': '2rem' },
+                boxShadow: {
+                    'card': '0 4px 16px 0 rgba(0, 0, 0, 0.07)',
+                    'hero': '0 10px 30px -5px rgba(37, 99, 235, 0.15)',
+                },
+                keyframes: {
+                    blobFloat1: {
+                        '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+                        '25%': { transform: 'translate(20px, -30px) scale(1.1)' },
+                        '50%': { transform: 'translate(-10px, 10px) scale(0.9)' },
+                        '75%': { transform: 'translate(10px, 20px) scale(1.05)' },
+                    },
+                    blobFloat2: {
+                        '0%, 100%': { transform: 'translate(0, 0) scale(1)' },
+                        '25%': { transform: 'translate(-15px, 25px) scale(1.05)' },
+                        '50%': { transform: 'translate(10px, -10px) scale(0.95)' },
+                        '75%': { transform: 'translate(-5px, -15px) scale(1)' },
+                    }
+                },
+                animation: {
+                    'blob1': 'blobFloat1 25s ease-in-out infinite',
+                    'blob2': 'blobFloat2 30s ease-in-out infinite',
+                }
+            }
+        }
+    }
+  </script>
+
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@19.0.0-rc-f994737d14-20240522",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0-rc-f994737d14-20240522/client",
+    "@google/genai": "https://esm.sh/@google/genai",
+    "marked": "https://esm.sh/marked",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="index.tsx"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
