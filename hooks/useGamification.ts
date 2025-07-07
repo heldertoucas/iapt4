@@ -19,10 +19,15 @@ export const useGamification = () => {
     });
 
     const [isMedalUnlocked, setIsMedalUnlocked] = useState(points >= GOAL);
+    const [showMedalPopup, setShowMedalPopup] = useState(false);
     const [notification, setNotification] = useState<string | null>(null);
 
     const dismissNotification = useCallback(() => {
         setNotification(null);
+    }, []);
+
+    const dismissMedalPopup = useCallback(() => {
+        setShowMedalPopup(false);
     }, []);
 
 
@@ -32,13 +37,16 @@ export const useGamification = () => {
             if (points >= GOAL) {
                 if (!isMedalUnlocked) {
                     console.log('[GAMIFICATION_DEBUG] Medal unlocked!');
+                    setShowMedalPopup(true);
                 }
                 setIsMedalUnlocked(true);
+            } else {
+                setIsMedalUnlocked(false);
             }
         } catch (error) {
             console.error("Could not save points to localStorage", error);
         }
-    }, [points, isMedalUnlocked]);
+    }, [points]);
 
     const addPoint = () => {
         setPoints(prevPoints => {
@@ -57,12 +65,12 @@ export const useGamification = () => {
             } else if (newPoints === 10) {
                 setNotification("Impressionante! Com 10 pontos, está quase a chegar. Só faltam 5!");
             } else if (newPoints >= GOAL) {
-                setNotification("Parabéns! Desbloqueou a medalha de Mestre de Prompts!");
+                setShowMedalPopup(true);
             }
             
             return newPoints;
         });
     };
 
-    return { points, addPoint, isMedalUnlocked, goal: GOAL, notification, dismissNotification };
+    return { points, addPoint, isMedalUnlocked, goal: GOAL, notification, dismissNotification, showMedalPopup, dismissMedalPopup };
 };

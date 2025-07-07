@@ -35,19 +35,6 @@ const PointsTracker = ({ points, goal, isMedalUnlocked }: PointsTrackerProps) =>
     return () => clearTimeout(timer);
   }, [points, isMedalUnlocked]);
 
-  if (isMedalUnlocked) {
-    return (
-      <a
-        href="https://lisbon.cityoflearning.eu/claim?code=5f8ica&qr=1"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex items-center justify-center p-3 bg-yellow-100 border-2 border-yellow-300 rounded-lg text-yellow-800 font-semibold hover:bg-yellow-200 transition"
-      >
-        <RemixIcon name="award-fill" className="mr-2" />
-        Medalha Desbloqueada! Clique para reclamar.
-      </a>
-    );
-  }
 
   return (
     <div className={`p-3 bg-pcd-card-bg rounded-lg transition-colors duration-300 ${isHighlighting ? 'highlight-score' : ''}`}>
@@ -61,6 +48,11 @@ const PointsTracker = ({ points, goal, isMedalUnlocked }: PointsTrackerProps) =>
           style={{ width: `${progressPercentage}%` }}
         ></div>
       </div>
+      {isMedalUnlocked && (
+        <p className="mt-3 text-sm text-yellow-700 font-semibold flex items-center justify-center gap-2">
+          <RemixIcon name="award-fill" /> Medalha desbloqueada!
+        </p>
+      )}
     </div>
   );
 };
