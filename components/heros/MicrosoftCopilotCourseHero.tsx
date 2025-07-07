@@ -25,7 +25,8 @@ const MicrosoftCopilotCourseHero = () => (
                     Explorar Blocos
                 </a>
             </div>
-        </section>
+        </div>
+    </section>
 );
 
 export default MicrosoftCopilotCourseHero;

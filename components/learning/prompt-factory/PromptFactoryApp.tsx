@@ -14,6 +14,7 @@ import PromptBuilder from './PromptBuilder';
 import GenerationResult from './GenerationResult';
 import PointsTracker from './PointsTracker';
 import GamificationNotification from './GamificationNotification';
+import MedalPopup from './MedalPopup';
 
 
 type Step = 'category' | 'recipe' | 'create' | 'result';
@@ -28,7 +29,7 @@ const PromptFactoryApp = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [generatedOutput, setGeneratedOutput] = useState('');
 
-    const { points, addPoint, isMedalUnlocked, goal, notification, dismissNotification } = useGamification();
+    const { points, addPoint, isMedalUnlocked, goal, notification, dismissNotification, showMedalPopup, dismissMedalPopup } = useGamification();
 
     const reset = useCallback(() => {
         setCurrentStep('category');
@@ -137,6 +138,7 @@ const PromptFactoryApp = () => {
                     />
                 </div>
             }
+            {showMedalPopup && <MedalPopup onClose={dismissMedalPopup} />}
             <div className="flex justify-between items-center">
                 <div className="w-1/2">
                     <ProgressBar currentStep={currentStep} onStepClick={handleStepClick} />

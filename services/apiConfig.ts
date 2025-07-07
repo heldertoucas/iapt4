@@ -17,6 +17,12 @@ type ServiceName = 'GEMINI' | 'OPENROUTER' | 'HUGGINGFACE' | 'SUPABASE_URL' | 'S
  */
 export function getApiKey(serviceName: ServiceName): string {
     console.log(`[API_KEY_DEBUG] Requesting key for: ${serviceName}`);
+    // Log available environment keys to aid debugging deployments where
+    // variables might be misnamed or stripped during the build process.
+    if (typeof import.meta !== 'undefined' && import.meta.env) {
+        const available = Object.keys(import.meta.env).join(', ');
+        console.log(`[API_KEY_DEBUG] Available import.meta.env keys: ${available}`);
+    }
     const keyMap: { [key in ServiceName]: string } = {
         GEMINI: 'API_KEY',
         OPENROUTER: 'OPENROUTER_API_KEY',
