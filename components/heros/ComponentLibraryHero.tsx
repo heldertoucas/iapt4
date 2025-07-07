@@ -25,7 +25,8 @@ const ComponentLibraryHero = () => (
                     Explorar Componentes
                 </a>
             </div>
-        </section>
+        </div>
+    </section>
 );
 
 export default ComponentLibraryHero;

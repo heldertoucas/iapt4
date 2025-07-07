@@ -27,7 +27,8 @@ const ManifestoCoCreationHero = () => (
                     Explorar os Princípios
                 </a>
             </div>
-        </section>
+        </div>
+    </section>
 );
 
 export default ManifestoCoCreationHero;
