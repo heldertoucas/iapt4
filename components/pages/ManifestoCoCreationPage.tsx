@@ -8,7 +8,6 @@ import AppFooter from '../layout/AppFooter';
 import PageSection from '../layout/PageSection';
 import RemixIcon from '../ui/RemixIcon';
 import ManifestoCoCreationHero from '../heros/ManifestoCoCreationHero';
-import PrincipleCard from '../learning/manifesto/PrincipleCard';
 import SuggestionForm from '../learning/manifesto/SuggestionForm';
 import { useManifestoData } from '../../hooks/useManifestoData';
 import type { PageProps } from '../App';
@@ -17,18 +16,19 @@ import AnimatedSection from '../AnimatedSection';
 import ReadManifestoSection from './ReadManifestoSection';
 import ResponsibleAiUsageSection from './ResponsibleAiUsageSection';
 import ManifestoStatsSection from '../learning/manifesto/ManifestoStatsSection';
+import PilarV6_ExpandedFeature from '../manifesto-pilares/PilarV6_ExpandedFeature';
 
 const ManifestoCoCreationPage = ({ navigateTo }: PageProps) => {
-    const { principles, suggestions, isLoading, error, voteOnPrinciple, submitSuggestion, voteOnSuggestion } = useManifestoData();
+    const { principles, suggestions, isLoading, error, voteOnPrinciple, submitSuggestion, voteOnSuggestion, refreshData } = useManifestoData();
     const [prefilledSuggestion, setPrefilledSuggestion] = useState('');
 
     const navLinks = [
         { href: "#stats", label: "Estatísticas" },
         { href: "#read-manifesto", label: "O Manifesto" },
-        { href: "#responsible-use", label: "Uso Responsável" },
         { href: "#principios", label: "Princípios" },
         { href: "#contribuir", label: "Contribuir" },
         { href: "#sugestoes", label: "Comunidade" },
+        { href: "#responsible-use", label: "Uso Responsável" },
     ];
 
     const handleSuggestForPrinciple = (principleTitle: string) => {
@@ -48,24 +48,16 @@ const ManifestoCoCreationPage = ({ navigateTo }: PageProps) => {
                 <ManifestoCoCreationHero />
                 <ManifestoStatsSection />
                 <ReadManifestoSection />
-                <ResponsibleAiUsageSection />
-
-                <PageSection
-                    id="principios"
-                    title="Os Pilares do Manifesto"
-                    subtitle="Explore cada um dos princípios IA para Todos, veja exemplos e dê a sua opinião."
-                    className="bg-pcd-card-bg"
-                >
-                    {isLoading && <div className="text-center"><RemixIcon name="loader-4-line" className="text-4xl animate-spin mx-auto text-pcd-accent" /></div>}
-                    {error && <div className="text-center text-red-500">{error}</div>}
-                    {!isLoading && !error && (
-                        <div className="grid md:grid-cols-2 gap-8">
-                            {principles.map(p => (
-                                <PrincipleCard key={p.id} principle={p} onVote={voteOnPrinciple} onSuggest={handleSuggestForPrinciple} />
-                            ))}
-                        </div>
-                    )}
-                </PageSection>
+                
+                {isLoading && <div className="text-center p-20"><RemixIcon name="loader-4-line" className="text-4xl animate-spin mx-auto text-pcd-accent" /></div>}
+                {error && <div className="text-center p-20 text-red-500">{error}</div>}
+                {!isLoading && !error && (
+                    <PilarV6_ExpandedFeature 
+                        principles={principles} 
+                        onVote={voteOnPrinciple}
+                        onSuggest={handleSuggestForPrinciple}
+                    />
+                )}
 
                 <AnimatedSection
                     tag="section"
@@ -80,7 +72,7 @@ const ManifestoCoCreationPage = ({ navigateTo }: PageProps) => {
                             </p>
                         </div>
                         <div className="max-w-3xl mx-auto">
-                            <SuggestionForm onSubmitSuggestion={submitSuggestion} prefilledText={prefilledSuggestion} />
+                            <SuggestionForm onSubmitSuggestion={submitSuggestion} prefilledText={prefilledSuggestion} onSubmissionSuccess={refreshData} />
                         </div>
                     </div>
                 </AnimatedSection>
@@ -99,7 +91,7 @@ const ManifestoCoCreationPage = ({ navigateTo }: PageProps) => {
                            {suggestions && suggestions.length > 0 ? (
                                 suggestions.map((s, index) => (
                                     <AnimatedSection key={s.id} delay={`${index * 0.1}s`}>
-                                        <SuggestionCard suggestion={s} onVote={voteOnSuggestion} />
+                                        <SuggestionCard suggestion={s} onVote={voteOnSuggestion} onVoteSuccess={refreshData} />
                                     </AnimatedSection>
                                 ))
                            ) : (
@@ -111,6 +103,8 @@ const ManifestoCoCreationPage = ({ navigateTo }: PageProps) => {
                         </div>
                     )}
                 </PageSection>
+
+                <ResponsibleAiUsageSection />
             </main>
             <AppFooter navigateTo={navigateTo} />
         </div>
