@@ -10,8 +10,16 @@ const GOAL = 15;
 export const useGamification = () => {
     const [points, setPoints] = useState<number>(() => {
         try {
-            const savedPoints = localStorage.getItem(POINTS_KEY);
-            return savedPoints ? parseInt(savedPoints, 10) : 0;
+            const saved = localStorage.getItem(POINTS_KEY);
+            if (saved === null) {
+                return 0;
+            }
+            const parsed = parseInt(saved, 10);
+            if (isNaN(parsed) || parsed < 0 || parsed > GOAL) {
+                console.warn(`[GAMIFICATION_DEBUG] Invalid stored points "${saved}". Resetting to 0.`);
+                return 0;
+            }
+            return parsed;
         } catch (error) {
             console.error("Could not read points from localStorage", error);
             return 0;
@@ -54,7 +62,7 @@ export const useGamification = () => {
                 return prevPoints;
             }
 
-            const newPoints = prevPoints + 1;
+            const newPoints = Math.min(prevPoints + 1, GOAL);
 
             console.log(`[GAMIFICATION_DEBUG] Added point. New total: ${newPoints}`);
 
