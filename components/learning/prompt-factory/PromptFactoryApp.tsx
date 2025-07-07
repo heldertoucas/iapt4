@@ -27,6 +27,7 @@ const PromptFactoryApp = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [generatedOutput, setGeneratedOutput] = useState('');
+    const [pointAdded, setPointAdded] = useState(false);
 
     const { points, addPoint, isMedalUnlocked, goal, notification, dismissNotification } = useGamification();
 
@@ -37,6 +38,7 @@ const PromptFactoryApp = () => {
         setGeneratedOutput('');
         setIsLoading(false);
         setFinalGeneratedPrompt('');
+        setPointAdded(false);
     }, []);
     
     const handleStepClick = (step: Step) => {
@@ -69,6 +71,7 @@ const PromptFactoryApp = () => {
         setGeneratedOutput('');
         setFinalGeneratedPrompt(prompt); // Save the prompt that will be used
         setCurrentStep('result');
+        setPointAdded(false);
 
         try {
             if (type === 'image') {
@@ -96,8 +99,11 @@ const PromptFactoryApp = () => {
     }, [selectedRecipe]);
     
     const handleGenerationSuccess = useCallback(() => {
-        addPoint();
-    }, [addPoint]);
+        if (!pointAdded) {
+            addPoint();
+            setPointAdded(true);
+        }
+    }, [addPoint, pointAdded]);
 
 
     const renderStep = () => {
