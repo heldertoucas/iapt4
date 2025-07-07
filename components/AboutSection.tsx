@@ -11,19 +11,19 @@ import AnimatedSection from './AnimatedSection';
 const AboutSection = () => {
     const slides: Slide[] = [
         {
-            backgroundImage: "https://images.unsplash.com/photo-1491841550275-5b462bf975db?q=80&w=2070&auto=format&fit=crop",
+            backgroundImage: "https://cloud1.email2go.io/97fc9b260a90d9c0aca468d2e6536980/835320b692c6fe64c1ff8709fb320147cae567cf37f5b8c17bb71bda0acd8340.png",
             title: "Todos podem aprender",
             text: "Oferecemos recursos e workshops para desmistificar a Inteligência Artificial, tornando-a compreensível para qualquer pessoa, independentemente da sua formação.",
             cta: { label: "Explorar recursos de aprendizagem →", href: "#learn", icon: "book-open-line" }
         },
         {
-            backgroundImage: "https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2070&auto=format&fit=crop",
+            backgroundImage: "https://cloud1.email2go.io/97fc9b260a90d9c0aca468d2e6536980/40101459ba768dd929c882d463375fe9069750284a22cee9651ca1093500c85b.png",
             title: "Todos podem participar",
             text: "Fomentamos um espaço de debate e colaboração, onde cidadãos, especialistas e decisores podem moldar o futuro da IA em conjunto.",
             cta: { label: "Junte-se à co-criação →", href: "#/manifesto-cocreate", icon: "group-line" }
         },
         {
-            backgroundImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop",
+            backgroundImage: "https://cloud1.email2go.io/97fc9b260a90d9c0aca468d2e6536980/9c47af4c44a157eca66518bc385bafbd4094e3fe97046017037dc024c439daf7.png",
             title: "Todos podem contribuir",
             text: "Promovemos iniciativas que aplicam a IA para o bem comum, resolvendo problemas locais e contribuindo para uma sociedade mais justa e eficiente.",
             cta: { label: "Veja como pode agir →", href: "#participate", icon: "lightbulb-flash-line" }
