@@ -78,3 +78,19 @@ export function getApiKey(serviceName: ServiceName): string {
     console.error(`[API_KEY_DEBUG] CRITICAL: API key for ${serviceName} is not set in any environment or placeholder.`);
     return '';
 }
+
+// --- Minimal placeholder API to avoid build errors ---
+export const api = {
+    async generate(prompt: string, type: 'text' | 'image', onTextChunk: (chunk: string) => void): Promise<string> {
+        console.warn('[API_PLACEHOLDER] api.generate called in placeholder mode');
+        if (type === 'text') {
+            onTextChunk('');
+            return '';
+        }
+        return '';
+    },
+
+    async rateRecipe(recipeId: string, rating: number): Promise<void> {
+        console.warn(`[API_PLACEHOLDER] rateRecipe called with id=${recipeId} rating=${rating}`);
+    },
+};
