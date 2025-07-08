@@ -17,9 +17,10 @@ type InlineQuizProps = {
     options: QuizOption[];
     correctFeedback: string;
     incorrectFeedback: string;
+    onAnswer?: () => void;
 };
 
-const InlineQuiz = ({ question, options, correctFeedback, incorrectFeedback }: InlineQuizProps) => {
+const InlineQuiz = ({ question, options, correctFeedback, incorrectFeedback, onAnswer }: InlineQuizProps) => {
     const [feedback, setFeedback] = useState<string | null>(null);
     const [isAnswered, setIsAnswered] = useState(false);
 
@@ -39,6 +40,7 @@ const InlineQuiz = ({ question, options, correctFeedback, incorrectFeedback }: I
             setFeedback(incorrectFeedback);
         }
         setIsAnswered(true);
+        onAnswer?.();
     };
 
     const getFeedbackClass = () => {
