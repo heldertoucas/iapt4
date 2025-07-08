@@ -65,6 +65,7 @@ export const appConfig: AppConfig = {
         '#/copilot-course': 'theme-green',
         '#/mscopilot-course': 'theme-blue',
         '#/mscopilot-course-v2': 'theme-orange',
+        '#/mscopilot-course-v3': 'theme-green',
         '#/component-library': 'theme-pink',
     },
 

@@ -21,7 +21,7 @@ const ResourcesSection = ({ navigateTo }: ResourcesSectionProps) => {
             description: "Domine os conceitos centrais de IA. Cobrimos tudo, desde algoritmos fundamentais e o papel dos dados na IA até às distinções entre IA Restrita, IA Geral e Superinteligência. Explore percursos de aprendizagem para iniciantes e para quem procura atualizar os seus conhecimentos.",
             topics: ["Modelos de Aprendizagem Automática", "Arquiteturas de Redes Neuronais", "Pré-processamento de Dados", "Fundamentos de Processamento de Linguagem Natural"],
             buttonText: "Inscrever-se no Curso ✨Descobrir a IA",
-            href: "#/copilot-course",
+            href: "#/mscopilot-course-v3",
             disabled: false,
         },
         {
