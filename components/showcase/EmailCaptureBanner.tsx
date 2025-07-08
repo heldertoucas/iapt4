@@ -19,6 +19,7 @@ const EmailCaptureBanner = () => {
                         <input
                             type="email"
                             placeholder="Your email"
+                            aria-label="Email"
                             className="flex-grow w-full px-4 py-2 text-gray-700 bg-pcd-card-bg border border-gray-300 rounded-l-md focus:ring-pcd-accent focus:border-pcd-accent focus:outline-none text-base"
                         />
                         <button className="px-6 py-2 bg-pcd-accent text-white font-semibold rounded-r-md hover:bg-opacity-90 transition-colors border border-pcd-accent -ml-px">
@@ -38,5 +39,4 @@ const EmailCaptureBanner = () => {
         </div>
     );
 };
-
 export default EmailCaptureBanner;
