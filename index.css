@@ -18,9 +18,16 @@
   --pcd-pink-light: #FDF2F8;
   --pcd-orange-light: #FFF7ED;
 
+  /* Typography */
+  --font-scale: 1;
+
   /* Theming Accent Colors */
   --pcd-accent-color: var(--pcd-blue);
   --pcd-accent-light-color: var(--pcd-blue-light);
+}
+
+html {
+  font-size: calc(100% * var(--font-scale));
 }
 
 .theme-purple {
