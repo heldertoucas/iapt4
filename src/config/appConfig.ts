@@ -61,7 +61,7 @@ interface AppConfig {
 export const appConfig: AppConfig = {
     // --- GENERAL SETTINGS ---
     useStudioNav: false, // <-- SET TO false FOR PRODUCTION
-    fontScale: 1,
+    fontScale: 5,
 
     // --- PAGE THEMES ---
     pageThemes: {
@@ -83,5 +83,4 @@ export const appConfig: AppConfig = {
         showGamificationSection: true,
         enableManifestoCoCreation: true,
         useGamificationSidebar: true,
-        enableComponentLibrary: true,
-    }};
+        enableComponentLibrary: true,    }};
