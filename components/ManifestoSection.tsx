@@ -35,7 +35,7 @@ const ManifestoSection = ({ navigateTo }: { navigateTo: (path: string) => void }
             </div>
             <AnimatedSection tag="div" className="mt-16 text-center" delay="0.6s">
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#participate" className="px-8 py-3 bg-pcd-accent text-white rounded-full font-medium hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    <a href="https://forms.cloud.microsoft/e/dJ6L5vNCwU" target="_blank" rel="noopener noreferrer" className="px-8 py-3 bg-pcd-accent text-white rounded-full font-medium hover:bg-opacity-90 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                         Assinar o Manifesto
                     </a>
                     <a href="#/manifesto-cocreate" onClick={(e) => { e.preventDefault(); navigateTo('#/manifesto-cocreate'); }} className="px-8 py-3 bg-transparent border-2 border-pcd-accent text-pcd-accent rounded-full font-medium hover:bg-pcd-accent hover:text-white transition-all">
