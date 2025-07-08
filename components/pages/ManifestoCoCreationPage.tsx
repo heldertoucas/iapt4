@@ -19,7 +19,7 @@ import ResponsibleAiUsageSection from './ResponsibleAiUsageSection';
 import ManifestoStatsSection from '../learning/manifesto/ManifestoStatsSection';
 
 const ManifestoCoCreationPage = ({ navigateTo }: PageProps) => {
-    const { principles, suggestions, isLoading, error, voteOnPrinciple, submitSuggestion, voteOnSuggestion } = useManifestoData();
+    const { principles, suggestions, isLoading, error, voteOnPrinciple, submitSuggestion, voteOnSuggestion, refreshData } = useManifestoData();
     const [prefilledSuggestion, setPrefilledSuggestion] = useState('');
 
     const navLinks = [
