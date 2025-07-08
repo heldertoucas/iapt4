@@ -27,7 +27,6 @@ const FaqSection = () => {
         <PageSection
             id="perguntas-frequentes"
             title={<>Perguntas <span className="text-pcd-accent">Frequentes</span></>}
-            subtitle="As suas questões, respondidas. Uma forma direta de perceber quem somos, o que fazemos e porquê."
             className="bg-pcd-bg-soft"
         >
             <div className="grid md:grid-cols-12 gap-8 items-center mt-12">
