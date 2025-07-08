@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 import React, { useState, useCallback } from 'react';
-import { categories, recipes } from '../../../data/prompt-factory-data';
 import type { Category, Recipe } from '../../../types/prompt-factory';
+import usePromptFactoryData from '../../../hooks/usePromptFactoryData';
 import { api } from '../../../services/prompt-factory-api';
 import { useGamification } from '../../../hooks/useGamification';
 import ProgressBar from './ProgressBar';
@@ -14,11 +14,13 @@ import PromptBuilder from './PromptBuilder';
 import GenerationResult from './GenerationResult';
 import PointsTracker from './PointsTracker';
 import GamificationNotification from './GamificationNotification';
+import MedalPopup from './MedalPopup';
 
 
 type Step = 'category' | 'recipe' | 'create' | 'result';
 
 const PromptFactoryApp = () => {
+    const { categories, recipes, isLoading: isDataLoading } = usePromptFactoryData();
     const [currentStep, setCurrentStep] = useState<Step>('category');
     const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
     const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
@@ -101,6 +103,9 @@ const PromptFactoryApp = () => {
 
 
     const renderStep = () => {
+        if (isDataLoading) {
+            return <p className="text-center">A carregar...</p>;
+        }
         switch (currentStep) {
             case 'category':
                 return <CategorySelector categories={categories} onSelectCategory={handleSelectCategory} />;
@@ -129,14 +134,17 @@ const PromptFactoryApp = () => {
 
     return (
         <div className="bg-pcd-card-bg p-6 md:p-8 rounded-2xl shadow-lg border-t-2 border-pcd-accent-light min-h-[600px] flex flex-col">
-            {notification &&
+            {notification && isMedalUnlocked && notification.includes('Mestre de Prompts') && (
+                <MedalPopup message={notification} onClose={dismissNotification} />
+            )}
+            {notification && !(isMedalUnlocked && notification.includes('Mestre de Prompts')) && (
                 <div className="mb-8">
                     <GamificationNotification
                         message={notification}
                         onClose={dismissNotification}
                     />
                 </div>
-            }
+            )}
             <div className="flex justify-between items-center">
                 <div className="w-1/2">
                     <ProgressBar currentStep={currentStep} onStepClick={handleStepClick} />
