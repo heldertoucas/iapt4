@@ -22,7 +22,7 @@ const ReadManifestoSection = () => {
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="text-left">
                         <h2 className="text-5xl font-bold text-pcd-text-dark font-lexend mb-6 leading-tight">
-                            Leia o nosso <span className="text-pcd-accent">Manifesto</span> completo.
+                            Leia o Manifesto <span className="text-pcd-accent">IA para Todos</span>
                         </h2>
                         <p className="text-xl text-pcd-text-light mb-8 max-w-lg">
                             Um documento vivo que detalha os nossos princípios fundamentais para uma IA que sirva a humanidade.

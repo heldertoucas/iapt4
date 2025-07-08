@@ -7,11 +7,12 @@ import RemixIcon from '../../ui/RemixIcon';
 import Card from '../../ui/Card';
 
 type SuggestionFormProps = {
-  onSubmitSuggestion: (suggestionText: string, author?: string) => Promise<void>;
+  onSubmitSuggestion: (suggestionText: string, author?: string, onSubmissionSuccess?: () => void) => Promise<void>;
   prefilledText?: string;
+  onSubmissionSuccess?: () => void;
 };
 
-const SuggestionForm = ({ onSubmitSuggestion, prefilledText }: SuggestionFormProps) => {
+const SuggestionForm = ({ onSubmitSuggestion, prefilledText, onSubmissionSuccess }: SuggestionFormProps) => {
     const [suggestion, setSuggestion] = useState('');
     const [authorName, setAuthorName] = useState('');
     const [showSignaturePopup, setShowSignaturePopup] = useState(false);
@@ -50,7 +51,7 @@ const SuggestionForm = ({ onSubmitSuggestion, prefilledText }: SuggestionFormPro
 
         try {
             const author = isAnonymous ? undefined : authorName.trim();
-            await onSubmitSuggestion(suggestion, author);
+            await onSubmitSuggestion(suggestion, author, onSubmissionSuccess);
             setIsSubmitted(true);
             setSuggestion('');
             setAuthorName('');
