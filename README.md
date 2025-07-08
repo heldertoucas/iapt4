@@ -26,11 +26,13 @@ cd ia-para-todos
 
 ### 2. Instalar Dependências
 
-Este projeto utiliza `npm` para gerir as dependências. Execute o seguinte comando na raiz do projeto:
+Execute o script de configuração para preparar o ambiente e instalar os pacotes necessários:
 
 ```bash
-npm install
+./scripts/setup_codex_environment.sh
 ```
+
+Se não puder executar o script, rode `npm install` manualmente.
 
 ### 3. Configurar Variáveis de Ambiente
 
@@ -65,6 +67,14 @@ npm run dev
 ```
 
 A aplicação estará agora disponível no seu navegador em [http://localhost:5173](http://localhost:5173) (ou numa porta diferente, se a 5173 estiver ocupada).
+
+### 5. Gerar o Build de Produção
+
+Antes de enviar alterações ou fazer o deploy, confirme que o projeto compila sem erros:
+
+```bash
+npm run build
+```
 
 ## Scripts Disponíveis
 

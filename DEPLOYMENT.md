@@ -98,7 +98,7 @@ Um erro comum durante o build na Vercel é a presença de nomes de pacotes invá
 
 1. Abra o ficheiro `package.json` e confirme que todas as dependências têm nomes válidos (apenas caracteres URL-friendly).
 2. Se encontrar entradas suspeitas, como `"react-dom/client"`, remova-as ou corrija-as. O nome do pacote deve ser apenas `"react-dom"`.
-3. Execute `npm install` localmente para validar que o ficheiro está correto.
+3. Rode `./scripts/setup_codex_environment.sh` para instalar todas as dependências necessárias (ou execute `npm install` se o script não estiver disponível).
 
 Esta verificação simples evita falhas no `npm install` durante o deploy e poupa tempo de troubleshooting.
 
