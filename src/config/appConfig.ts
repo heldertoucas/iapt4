@@ -24,6 +24,12 @@ interface AppConfig {
     useStudioNav: boolean;
 
     /**
+     * Global typography scale (1-10)
+     * Adjusts the root font size for accessibility testing.
+     */
+    fontScale: number;
+
+    /**
      * Page-specific Theming
      * Assigns a color theme to each sub-page. The theme class will be applied
      * to the root element of the page.
@@ -55,6 +61,7 @@ interface AppConfig {
 export const appConfig: AppConfig = {
     // --- GENERAL SETTINGS ---
     useStudioNav: false, // <-- SET TO false FOR PRODUCTION
+    fontScale: 5,
 
     // --- PAGE THEMES ---
     pageThemes: {
@@ -77,5 +84,4 @@ export const appConfig: AppConfig = {
         enableManifestoCoCreation: true,
         useGamificationSidebar: true,
         enableComponentLibrary: true,
-    }
-};
+    }};

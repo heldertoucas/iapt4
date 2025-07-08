@@ -18,9 +18,16 @@
   --pcd-pink-light: #FDF2F8;
   --pcd-orange-light: #FFF7ED;
 
+  /* Typography */
+  --font-scale: 1;
+
   /* Theming Accent Colors */
   --pcd-accent-color: var(--pcd-blue);
   --pcd-accent-light-color: var(--pcd-blue-light);
+}
+
+html {
+  font-size: calc(100% * var(--font-scale));
 }
 
 .theme-purple {
@@ -48,6 +55,8 @@
 body {
   font-family: 'Inter', sans-serif;
   scroll-behavior: smooth;
+  font-size: 1.125rem;
+  line-height: 1.6;
   background-color: var(--pcd-page-bg);
 }
 .animated-section {
@@ -205,23 +214,24 @@ section > .container {
     color: var(--pcd-text-dark);
     margin-bottom: 1rem;
 }
-.markdown-content h1 { 
+.markdown-content h1 {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    margin-top: 1.5rem;
+}
+.markdown-content h2 {
     font-size: 1.5rem;
     line-height: 2rem;
-    margin-top: 1.5rem; 
-}
-.markdown-content h2 { 
-    font-size: 1.25rem;
-    line-height: 1.75rem;
     margin-top: 1.25rem;
 }
-.markdown-content h3 { 
-    font-size: 1.125rem;
-    line-height: 1.75rem;
+.markdown-content h3 {
+    font-size: 1.25rem;
+    line-height: 1.875rem;
     margin-top: 1rem;
 }
-.markdown-content p { 
-    margin-bottom: 1rem; 
+.markdown-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
 }
 .markdown-content ul,
 .markdown-content ol { 
@@ -235,8 +245,9 @@ section > .container {
 .markdown-content ol { 
     list-style-type: decimal; 
 }
-.markdown-content li { 
-    margin-bottom: 0.5rem; 
+.markdown-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
 }
 .markdown-content strong { 
     font-weight: 600; 

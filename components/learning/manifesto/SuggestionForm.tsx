@@ -107,6 +107,7 @@ const SuggestionForm = ({ onSubmitSuggestion, prefilledText, onSubmissionSuccess
                     value={suggestion}
                     onChange={(e) => setSuggestion(e.target.value)}
                     placeholder="Escreva aqui a sua sugestão para um novo princípio..."
+                    aria-label="Sugestão"
                     className="w-full h-32 p-3 border-2 border-pcd-border rounded-lg focus:border-pcd-accent focus:ring-1 focus:ring-pcd-accent transition"
                 />
                 <button
