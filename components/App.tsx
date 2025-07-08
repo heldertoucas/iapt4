@@ -11,6 +11,7 @@ import MicrosoftCopilotCoursePage from './pages/MicrosoftCopilotCoursePage';
 import ManifestoCoCreationPage from './pages/ManifestoCoCreationPage';
 import ComponentLibraryPage from './pages/ComponentLibraryPage';
 import MicrosoftCopilotCoursePage2 from './pages/MicrosoftCopilotCoursePage2'; // Import the new course page
+import MicrosoftCopilotCoursePage3 from './pages/MicrosoftCopilotCoursePage3';
 import { appConfig } from '../src/config/appConfig';
 
 // Define the shape of a page definition, used for routing and navigation.
@@ -37,6 +38,7 @@ const allPages: PageDefinition[] = [
     { label: "Curso ✨Descobrir a IA", path: '#/copilot-course', component: CopilotCoursePage },
     { label: "Curso MS Copilot", path: '#/mscopilot-course', component: MicrosoftCopilotCoursePage },
     { label: "Curso MS Copilot V2", path: '#/mscopilot-course-v2', component: MicrosoftCopilotCoursePage2 }, // Add the new course page
+    { label: "Curso MS Copilot V3", path: '#/mscopilot-course-v3', component: MicrosoftCopilotCoursePage3 },
     { label: "Biblioteca de Componentes", path: '#/component-library', component: ComponentLibraryPage, featureFlag: 'enableComponentLibrary' },
 ];
 
