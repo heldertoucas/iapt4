@@ -62,7 +62,7 @@ interface AppConfig {
 export const appConfig: AppConfig = {
     // --- GENERAL SETTINGS ---
     useStudioNav: false, // <-- SET TO false FOR PRODUCTION
-    fontScale: 3,
+    fontScale: 2,
 
     // --- PAGE THEMES ---
     pageThemes: {
