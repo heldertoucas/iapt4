@@ -12,7 +12,9 @@ import { appConfig } from './src/config/appConfig';
 // --- Mount Application to the DOM ---
 const rootElement = document.getElementById('root');
 if (rootElement) {
-    document.documentElement.style.setProperty('--font-scale', String(appConfig.fontScale));
+    // Map the 1-10 font scale to a gentle CSS scaling factor.
+    const computedScale = 1 + (appConfig.fontScale - 3) * 0.1;
+    document.documentElement.style.setProperty('--font-scale', String(computedScale));
     const root = ReactDOM.createRoot(rootElement);
     root.render(
       <StrictMode>

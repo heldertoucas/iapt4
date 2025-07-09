@@ -25,7 +25,8 @@ interface AppConfig {
 
     /**
      * Global typography scale (1-10)
-     * Adjusts the root font size for accessibility testing.
+     * A value of 3 represents the default size. Values above or below
+     * 3 will adjust the base font size in small increments.
      */
     fontScale: number;
 
@@ -61,7 +62,7 @@ interface AppConfig {
 export const appConfig: AppConfig = {
     // --- GENERAL SETTINGS ---
     useStudioNav: false, // <-- SET TO false FOR PRODUCTION
-    fontScale: 5,
+    fontScale: 3,
 
     // --- PAGE THEMES ---
     pageThemes: {
@@ -82,5 +83,6 @@ export const appConfig: AppConfig = {
         showElearningShowcase: true,
         showGamificationSection: true,
         enableManifestoCoCreation: true,
-        useGamificationSidebar: true,
-        enableComponentLibrary: true,    }};
+        useGamificationSidebar: true,        enableComponentLibrary: true,
+    }
+};
