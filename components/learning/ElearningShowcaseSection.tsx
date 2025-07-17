@@ -21,7 +21,7 @@ import { appConfig } from '../../src/config/appConfig';
 const ElearningShowcaseSection = () => {
 
     const missionBlocks = (
-        <div className="space-y-10">
+        <div className="space-y-12">
             {/* Bloco 1: Narrativa Interativa */}
             <MissionBlock category="aprender" title="Um Problema para Resolver">
                 <p className="text-lg text-pcd-text-light leading-relaxed mb-6">A sua vizinha, a D. Amélia, ouviu falar da "Inteligência Artificial" nas notícias e está assustada. Ela pede-lhe ajuda para perceber o que é. <strong>O que lhe diz primeiro?</strong></p>

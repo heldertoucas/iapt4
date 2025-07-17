@@ -41,7 +41,7 @@ const SocialReflection = ({ question, initialReflections }: SocialReflectionProp
                 id="reflection-input"
                 value={userReflection}
                 onChange={(e) => setUserReflection(e.target.value)}
-                className="mt-4 w-full p-3 border-2 border-pcd-border rounded-lg focus:border-pcd-accent focus:ring-1 focus:ring-pcd-accent transition"
+                className="mt-4 w-full p-4 border-2 border-pcd-border rounded-lg focus:border-pcd-accent focus:ring-1 focus:ring-pcd-accent transition text-base"
                 rows={3}
                 placeholder="Partilhe a sua reflexão..."
                 disabled={isShared}
@@ -55,13 +55,13 @@ const SocialReflection = ({ question, initialReflections }: SocialReflectionProp
             </button>
 
             {isShared && (
-                <div id="shared-answers" className="mt-6">
-                    <h3 className="font-lexend font-semibold text-pcd-text-dark mb-3">Reflexões da Turma:</h3>
-                    <div className="space-y-3 max-h-48 overflow-y-auto pr-2">
+                <div id="shared-answers" className="mt-8">
+                    <h3 className="font-lexend font-semibold text-pcd-text-dark mb-4">Reflexões da Turma:</h3>
+                    <div className="space-y-4 max-h-48 overflow-y-auto pr-2">
                         {reflections.map((reflection, index) => (
                             <div
                                 key={index}
-                                className={`p-3 border border-pcd-border rounded-lg text-sm ${
+                                className={`p-4 border border-pcd-border rounded-lg text-base ${
                                     reflection.author === 'Você' ? 'bg-pcd-accent-light' : 'bg-pcd-card-bg'
                                 }`}
                             >

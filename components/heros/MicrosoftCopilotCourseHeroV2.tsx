@@ -20,7 +20,7 @@ const MicrosoftCopilotCourseHeroV2 = ({ navigateTo }: HeroProps) => {
     };
 
     return (
-        <section className="bg-pcd-bg-soft py-20 md:py-32 overflow-hidden">
+        <section className="bg-gradient-to-br from-pcd-accent-light/20 to-pcd-bg-soft py-20 md:py-32 overflow-hidden">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid md:grid-cols-2 gap-x-16 gap-y-12 items-center">
                     {/* Left Column: Text and CTAs */}

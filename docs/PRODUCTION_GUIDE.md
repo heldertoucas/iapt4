@@ -1,274 +1,136 @@
-# Reverting AI Studio Preview Changes for Production
+# Guia de Produção e Deployment na Vercel
 
-To restore the application to its production-ready state with URL-based routing, you will need to instruct me to modify the following files as described below. These changes will replace the temporary tab-based navigation with a functional router and re-enable all inter-page links.
+Este documento fornece um guia passo-a-passo e definitivo para configurar e implementar a aplicação "IA para Todos" num ambiente de produção, com foco na plataforma Vercel.
 
 ---
 
-### 1. Restore the Router in `components/App.tsx`
+## Passo 1: Configuração do Código para Produção
 
-The main `App.tsx` component needs to be changed from a tab-based system back to a URL hash-based router.
+Antes de fazer o deploy, há uma configuração crucial a ser feita no código para garantir que a aplicação se comporta como esperado num ambiente de produção.
 
-**Instruction:** "Update `components/App.tsx` to implement a URL hash-based router instead of the tab navigation."
+### Desativar a Navegação de Pré-visualização
 
-**Target Code (`components/App.tsx`):**
-```tsx
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
-*/
-import React, { useState, useEffect } from 'react';
-import HomePage from './pages/HomePage';
-import PromptFactoryPage from './pages/PromptFactoryPage';
-import CopilotCoursePage from './pages/CopilotCoursePage';
+A aplicação tem uma bandeira de funcionalidade (`feature flag`) para uma navegação especial de desenvolvimento, útil em ambientes como o AI Studio. Para produção, esta deve ser desativada.
 
-// Simple hash-based router
-const App = () => {
-    const [route, setRoute] = useState(window.location.hash);
+1.  Abra o ficheiro: `src/config/appConfig.ts`
+2.  Localize a linha `useStudioNav: true`.
+3.  Altere o valor para `false`:
 
-    useEffect(() => {
-        const handleHashChange = () => {
-            setRoute(window.location.hash);
-            window.scrollTo(0, 0); // Scroll to top on page change
-        };
+    ```typescript
+    // src/config/appConfig.ts
 
-        window.addEventListener('hashchange', handleHashChange);
-        // Set initial route
-        handleHashChange();
-
-        return () => {
-            window.removeEventListener('hashchange', handleHashChange);
-        };
-    }, []);
-
-    const renderPage = () => {
-        switch (route) {
-            case '#/prompt-factory':
-                return <PromptFactoryPage />;
-            case '#/copilot-course':
-                return <CopilotCoursePage />;
-            default:
-                return <HomePage />;
-        }
+    export const appConfig: AppConfig = {
+        // --- GENERAL SETTINGS ---
+        useStudioNav: false, // <-- SET TO false FOR PRODUCTION
+        
+        // ... resto da configuração
     };
+    ```
 
-    return (
-        <div>
-            {renderPage()}
-        </div>
-    );
-};
-
-export default App;
-```
+Esta alteração irá remover o menu de navegação suspenso para programadores do cabeçalho principal, apresentando a interface limpa pretendida para os utilizadores finais.
 
 ---
 
-### 2. Re-enable Links in `components/LearnSection.tsx`
+## Passo 2: Gestão de Chaves de API e Segurança
 
-The disabled links in the "Aprender" section need to be converted back into functional `<a>` tags.
+A gestão correta das chaves de API é fundamental para a segurança e funcionalidade da aplicação. **Nunca deve hardcodar chaves de API diretamente no código que é enviado para o GitHub.**
 
-**Instruction:** "Re-enable the navigation links in `components/LearnSection.tsx`."
+### A. Para Desenvolvimento Local
 
-**Target Code (`components/LearnSection.tsx`):**
-```tsx
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
-*/
-import React from 'react';
-import AnimatedSection from './AnimatedSection';
-import RemixIcon from './ui/RemixIcon';
-import PageSection from './layout/PageSection';
-import Card from './ui/Card';
+1.  Na raiz do seu projeto, crie um ficheiro chamado `.env.local`.
+2.  Adicione as suas chaves de API a este ficheiro, usando o prefixo `VITE_`. A aplicação está configurada para as ler.
 
-// --- LearnSection Component ---
-const LearnSection = ({ onShowResources }: { onShowResources: () => void }) => {
-    const resources = [
-        { icon: "book-line", title: "Curso rápido ✨Descobrir a IA", level: "Iniciante", levelColorClass: "bg-green-100 text-green-800", description: "Comece a sua jornada com conceitos fundamentais explicados em linguagem simples.", href: "#/copilot-course" },
-        { icon: "award-line", title: "Certificação IA para Todos", level: "Todos os Níveis", levelColorClass: "bg-pcd-accent-light text-pcd-accent", description: "Desbloqueie todo o potencial da IA, desde o nível inicial ao avançado.", href: "#" },
-        { icon: "computer-line", title: "Fábrica de Prompts IA", level: "Interativo", levelColorClass: "bg-purple-100 text-purple-800", description: "Descubra ferramentas acessíveis que lhe permitem experienciar a IA em primeira mão.", href: "#/prompt-factory"},
-        { icon: "windows-line", title: "Descobrir a IA Microsoft Copilot", level: "Iniciante", levelColorClass: "bg-orange-100 text-orange-800", description: "Um curso prático para dominar o assistente de IA da Microsoft e aumentar a sua produtividade.", href: "#/copilot-course"},
-    ];
-    
-    const title = <>Aprender Sobre <span className="text-pcd-accent">IA</span></>;
-    const subtitle = "Explore os nossos recursos concebidos para tornar a IA compreensível para todos.";
+    ```bash
+    # Exemplo de conteúdo para .env.local
+    VITE_API_KEY=A_SUA_CHAVE_DO_GEMINI
+    VITE_SUPABASE_URL=A_URL_DO_SEU_PROJETO_SUPABASE
+    VITE_SUPABASE_ANON_KEY=A_CHAVE_ANONIMA_DO_SUPABASE
+    VITE_OPENROUTER_API_KEY=A_SUA_CHAVE_DO_OPENROUTER
+    VITE_HUGGINGFACE_API_KEY=A_SUA_CHAVE_DO_HUGGINGFACE
+    ```
+> **Nota de Segurança:** O ficheiro `.gitignore` já está configurado para ignorar os ficheiros `.env.local`, garantindo que as suas chaves secretas nunca sejam expostas.
 
-    return (
-        <PageSection id="learn" className="bg-pcd-bg-soft" title={title} subtitle={subtitle}>
-            <div className="grid md:grid-cols-2 gap-8">
-                {resources.map((resource, index) => (
-                    <Card key={resource.title} delay={`${index * 0.1}s`} className="h-full">
-                        <a href={resource.href} className="flex items-start flex-col h-full">
-                            <div className="flex-grow">
-                                <div className="flex items-start">
-                                     <div className={`flex-shrink-0 flex items-center justify-center h-20 w-20 bg-pcd-accent-light rounded-lg mr-5`}><RemixIcon name={resource.icon} className={`text-5xl text-pcd-accent`} /></div>
-                                    <div className="flex-grow">
-                                        <h3 className="text-2xl font-semibold text-gray-900">{resource.title}</h3>
-                                        <span className={`inline-block mt-2 mb-2 text-sm px-2 py-1 rounded-full ${resource.levelColorClass}`}>{resource.level}</span>
-                                        <p className="text-lg text-gray-600">{resource.description}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <span className="inline-block mt-4 text-pcd-accent font-medium text-base group-hover:underline">Explorar Recursos →</span>
-                        </a>
-                    </Card>
-                ))}
-            </div>
-            <AnimatedSection tag="div" className="mt-16 text-center" delay="0.4s">
-                <a onClick={onShowResources} href="#resources" className="inline-block px-8 py-4 bg-pcd-accent text-white rounded-full font-medium hover:bg-opacity-90 transition-colors shadow-lg text-lg">
-                    Ver Todos os Recursos
-                </a>
-            </AnimatedSection>
-        </PageSection>
-    );
-};
+### B. Para Produção na Vercel
 
-export default LearnSection;
-```
+As suas chaves secretas devem ser configuradas como variáveis de ambiente no painel de controlo da Vercel.
+
+1.  No seu projeto na Vercel, vá a **Settings > Environment Variables**.
+2.  Adicione as variáveis necessárias. Em produção, a aplicação irá procurar por estes nomes **sem o prefixo `VITE_`**.
+
+| Nome                  | Valor                                     | Obrigatório |
+| :-------------------- | :---------------------------------------- |:-----------:|
+| `API_KEY`             | `SUA_CHAVE_DO_GEMINI`                     |     Sim     |
+| `SUPABASE_URL`        | `A_URL_DO_SEU_PROJETO_SUPABASE`           |     Sim     |
+| `SUPABASE_ANON_KEY`   | `A_CHAVE_ANONIMA_DO_SUPABASE`             |     Sim     |
+| `OPENROUTER_API_KEY`  | `SUA_CHAVE_DO_OPENROUTER`                 |  Opcional   |
+| `HUGGINGFACE_API_KEY` | `SUA_CHAVE_DO_HUGGINGFACE`                |  Opcional   |
 
 ---
 
-### 3. Re-enable Links in `components/ResourcesSection.tsx`
+## Passo 3: Verificação da Configuração do Projeto (`package.json`)
 
-The call-to-action buttons in the "Recursos" section must be restored to functional `<a>` tags.
+A Vercel executa o comando `npm install` durante o processo de build. Para evitar erros, é crucial que o ficheiro `package.json` esteja correto e não contenha nomes de pacotes inválidos.
 
-**Instruction:** "Re-enable the links in `components/ResourcesSection.tsx`."
+Verifique se o seu `package.json` corresponde à seguinte estrutura:
 
-**Target Code (`components/ResourcesSection.tsx`):**
-```tsx
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
-*/
-import React from 'react';
-import RemixIcon from './ui/RemixIcon';
-import PageSection from './layout/PageSection';
-import AnimatedSection from './AnimatedSection';
-
-// --- ResourcesSection Component ---
-const ResourcesSection = () => {
-    const resources = [
-        {
-            icon: "book-line",
-            title: "Fundamentos de IA: Curso rápido ✨Descobrir a IA",
-            description: "Domine os conceitos centrais de IA. Cobrimos tudo, desde algoritmos fundamentais e o papel dos dados na IA até às distinções entre IA Restrita, IA Geral e Superinteligência.",
-            topics: ["Modelos de Aprendizagem Automática", "Arquiteturas de Redes Neuronais", "Pré-processamento de Dados"],
-            buttonText: "Inscrever-se no Curso ✨Descobrir a IA",
-            href: "#/copilot-course"
-        },
-        // ... (other resources)
-    ];
-
-    const title = <><span className="text-pcd-accent">Recursos Aprofundados</span></>;
-    const subtitle = "Mergulhe mais fundo no mundo da IA com os nossos guias, ferramentas e discussões.";
-
-
-    return (
-         <PageSection id="resources" className="bg-pcd-card-bg" title={title} subtitle={subtitle}>
-            <div className="grid md:grid-cols-2 gap-10">
-                {resources.map((resource, index) => (
-                    <AnimatedSection key={resource.title} tag="div" className="bg-pcd-card-bg p-8 rounded-xl shadow-lg border-t-2 border-pcd-accent-light hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 h-full flex flex-col" delay={`${index * 0.1}s`}>
-                        {/* ... (resource content) */}
-                        <a href={resource.href} className="mt-auto inline-block bg-pcd-accent text-white text-center px-6 py-3 rounded-lg font-medium shadow-md hover:bg-opacity-90 transition text-lg">{resource.buttonText}</a>
-                    </AnimatedSection>
-                ))}
-            </div>
-        </PageSection>
-    );
-};
-
-export default ResourcesSection;
+```json
+{
+  "name": "v4-ia-para-todos-react-spa",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "@google/genai": "latest",
+    "marked": "latest",
+    "@supabase/supabase-js": "latest"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0"
+  }
+}
 ```
+**Ponto Crítico:** Confirme que `react-dom` está listado e não `react-dom/client` ou outras entradas inválidas.
 
 ---
 
-### 4. Restore Links in Headers and Footers
+## Passo 4: Processo de Deployment
 
-The "back" links in the sub-page layouts and main footer must be restored to be functional `<a>` tags pointing to `#/`.
+Com a configuração concluída, pode fazer o deploy da sua aplicação.
 
-**Instruction:** "Restore the navigation links in `AppHeader`, `AppFooter`, and `Footer` components."
+### A. Enviar o Código para o GitHub
 
-**Target Code (`components/layout/AppHeader.tsx`):**
-```tsx
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
-*/
-import React, { useState } from 'react';
-import RemixIcon from '../ui/RemixIcon';
-import StaticLogo from '../StaticLogo';
-import PromptFactoryIcon from '../icons/PromptFactoryIcon'; // Ensure this import if needed
+1.  **Inicialize o Git (se ainda não o fez):**
+    ```bash
+    git init -b main
+    ```
+2.  **Adicione o repositório remoto do GitHub:**
+    ```bash
+    git remote add origin https://github.com/SEU_UTILIZADOR/SEU_REPOSITORIO.git
+    ```
+3.  **Adicione, faça commit e envie as suas alterações:**
+    ```bash
+    git add .
+    git commit -m "Preparar para o deploy de produção"
+    git push -u origin main
+    ```
 
-type NavLink = {
-    href: string;
-    label: string;
-};
+### B. Implementar na Vercel
 
-type AppHeaderProps = {
-    title: string;
-    navLinks: NavLink[];
-    titleIcon?: React.ReactNode;
-};
+1.  **Aceda à Vercel** e faça login com a sua conta do GitHub.
+2.  **Adicionar Novo Projeto:** Clique em **Add New... > Project**.
+3.  **Importar Repositório:** Selecione o seu repositório do GitHub e clique em **Import**.
+4.  **Configurar Projeto:** A Vercel detetará que é um projeto **Vite**. As configurações padrão de build são geralmente corretas.
+5.  **Adicionar Variáveis de Ambiente:** Expanda a secção **Environment Variables** e adicione as chaves conforme descrito no **Passo 2B**.
+6.  **Deploy:** Clique no botão **Deploy**.
 
-const AppHeader = ({ title, navLinks, titleIcon }: AppHeaderProps) => {
-    // ... (useState for mobile menu)
-    
-    return (
-        <header className="sticky top-0 w-full z-40 transition-all duration-300 bg-pcd-card-bg/95 backdrop-blur-lg shadow-md">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
-                    <div className="flex items-center">
-                       <a href="#/" className="flex items-center text-gray-700 hover:text-pcd-accent transition-colors">
-                           <RemixIcon name="arrow-left-line" className="h-5 w-5 mr-2" />
-                           <span className="text-base font-medium hidden sm:inline">Página Principal</span>
-                           <StaticLogo className="h-7 ml-3" />
-                       </a>
-                       <div className="h-6 w-px bg-gray-200 mx-4"></div>
-                       <div className="flex items-center cursor-default gap-x-3">
-                          {titleIcon}
-                          <span className="text-2xl font-bold text-gray-800">
-                            {title}
-                          </span>
-                       </div>
-                    </div>
-                    {/* ... (rest of the header JSX) */}
-                </div>
-            </div>
-            {/* ... (mobile menu JSX) */}
-        </header>
-    );
-};
-
-export default AppHeader;
-```
-**Target Code (`components/layout/AppFooter.tsx`):**
-```tsx
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
-*/
-import React from 'react';
-import StaticLogo from '../StaticLogo';
-
-// --- Footer Component ---
-const AppFooter = () => {
-    const currentYear = new Date().getFullYear();
-    
-    return (
-        <footer className="bg-gray-100 border-t border-gray-200">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
-                <div className="inline-flex items-center justify-center mb-4 cursor-default">
-                    <StaticLogo className="h-8 mr-3" />
-                    <h3 className="text-2xl font-bold text-gray-800">IA para Todos</h3>
-                </div>
-                <p className="text-gray-500 text-base mb-2">&copy; {currentYear} IA para Todos...</p>
-                <p className="text-gray-500 text-base">
-                    <a href="#/" className="text-pcd-accent hover:underline">Voltar à Página Principal</a>
-                </p>
-            </div>
-        </footer>
-    );
-};
-
-export default AppFooter;
-```
+A Vercel irá agora construir e implementar a sua aplicação. Após a conclusão, ser-lhe-á fornecido um URL público. A partir deste ponto, cada `git push` para a sua branch `main` irá acionar automaticamente um novo deploy.

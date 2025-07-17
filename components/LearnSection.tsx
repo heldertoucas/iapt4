@@ -16,10 +16,8 @@ type LearnSectionProps = {
 // --- LearnSection Component ---
 const LearnSection = ({ navigateTo, onShowAllResources }: LearnSectionProps) => {
     const resources = [
-        { icon: "book-line", title: "Curso rápido ✨Descobrir a IA", level: "Iniciante", levelColorClass: "bg-green-100 text-green-800", description: "Comece a sua jornada com conceitos fundamentais explicados em linguagem simples.", href: "#/mscopilot-course-v3", disabled: true },
         { icon: "award-line", title: "Certificação IA para Todos", level: "Todos os Níveis", levelColorClass: "bg-pcd-accent-light text-pcd-accent", description: "Desbloqueie todo o potencial da IA, desde o nível inicial ao avançado.", href: "#", disabled: true },
         { icon: "computer-line", title: "Fábrica de Prompts IA", level: "Interativo", levelColorClass: "bg-purple-100 text-purple-800", description: "Descubra ferramentas acessíveis que lhe permitem experienciar a IA em primeira mão.", href: "#/prompt-factory"},
-        { icon: "windows-line", title: "Descobrir a IA Microsoft Copilot", level: "Iniciante", levelColorClass: "bg-orange-100 text-orange-800", description: "Um curso prático para dominar o assistente de IA da Microsoft e aumentar a sua produtividade.", href: "#/mscopilot-course-v3"},
         { icon: "video-line", title: "Curtas de IA", level: "Vídeos", levelColorClass: "bg-blue-100 text-blue-800", description: "Aprenda visualmente com vídeos curtos que explicam conceitos complexos de IA em minutos.", href: "#", disabled: true },
     ];
     

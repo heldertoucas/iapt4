@@ -13,7 +13,7 @@ const SYSTEM_INSTRUCTION = "És um assistente de IA divertido e pedagógico. Res
 
 async function _generateWithGemini(prompt: string, onTextChunk: (chunk: string) => void): Promise<void> {
     const apiKey = getApiKey('GEMINI');
-    if (!apiKey || apiKey.includes('COLOQUE')) throw new Error("Gemini API Key not configured.");
+    if (!apiKey || apiKey.includes('COLOQUE')) throw new Error("Gemini API Key not configured. Ensure 'VITE_API_KEY' is set in your Vercel environment variables.");
     
     const ai = new GoogleGenAI({ apiKey });
     const responseStream = await ai.models.generateContentStream({
@@ -28,7 +28,7 @@ async function _generateWithGemini(prompt: string, onTextChunk: (chunk: string) 
 
 async function _generateImageWithGemini(prompt: string): Promise<string> {
     const apiKey = getApiKey('GEMINI');
-    if (!apiKey || apiKey.includes('COLOQUE')) throw new Error("Gemini API Key not configured.");
+    if (!apiKey || apiKey.includes('COLOQUE')) throw new Error("Gemini API Key not configured. Ensure 'VITE_API_KEY' is set in your Vercel environment variables.");
 
     const ai = new GoogleGenAI({ apiKey });
     const response = await ai.models.generateImages({
@@ -46,7 +46,7 @@ async function _generateImageWithGemini(prompt: string): Promise<string> {
 
 async function _generateWithOpenRouter(prompt: string, onTextChunk: (chunk: string) => void): Promise<void> {
     const apiKey = getApiKey('OPENROUTER');
-    if (!apiKey || apiKey.includes('COLOQUE')) throw new Error("OpenRouter API Key not configured.");
+    if (!apiKey || apiKey.includes('COLOQUE')) throw new Error("OpenRouter API Key not configured. Ensure 'VITE_OPENROUTER_API_KEY' is set in your Vercel environment variables.");
     
     const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
@@ -88,7 +88,7 @@ async function _generateWithOpenRouter(prompt: string, onTextChunk: (chunk: stri
 
 async function _generateWithHuggingFace(prompt: string, onTextChunk: (chunk: string) => void): Promise<void> {
      const apiKey = getApiKey('HUGGINGFACE');
-    if (!apiKey || apiKey.includes('COLOQUE')) throw new Error("Hugging Face API Key not configured.");
+    if (!apiKey || apiKey.includes('COLOQUE')) throw new Error("Hugging Face API Key not configured. Ensure 'VITE_HUGGINGFACE_API_KEY' is set in your Vercel environment variables.");
 
     const response = await fetch("https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2", {
         method: "POST",
@@ -160,7 +160,7 @@ export const api = {
 
         const { error } = await supabase.rpc('increment_recipe_rating', {
             recipe_id: recipeId,
-            rating_value: rating,
+            rating_value: rating
         });
 
         if (error) {

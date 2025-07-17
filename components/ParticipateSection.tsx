@@ -10,7 +10,7 @@ import Card from './ui/Card';
 // --- ParticipateSection Component ---
 const ParticipateSection = () => {
     return (
-        <AnimatedSection tag="section" id="participate" className="py-20 bg-gradient-to-br from-blue-600 via-purple-600 to-teal-500 text-white">
+        <AnimatedSection tag="section" id="participate" className="py-20 bg-pcd-gradient-main text-white">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center">
                     <h2 className="text-3xl md:text-4xl font-bold mb-4">Junte-se ao Movimento</h2>

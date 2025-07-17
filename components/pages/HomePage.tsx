@@ -16,16 +16,7 @@ import type { PageProps } from '../App';
 import FaqSection from '../FaqSection';
 
 const HomePage = ({ navigateTo, pages, activePath }: PageProps) => {
-  const [isHeaderScrolled, setIsHeaderScrolled] = useState(false);
   const [showResources, setShowResources] = useState(false);
-
-  React.useEffect(() => {
-    const handleScroll = () => {
-      setIsHeaderScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const handleShowResources = useCallback(() => {
     setShowResources(true);
@@ -35,10 +26,17 @@ const HomePage = ({ navigateTo, pages, activePath }: PageProps) => {
     }, 100);
   }, []);
 
+  const mainNavLinks = [
+    { href: "#manifesto", label: "Manifesto" },
+    { href: "#about", label: "O Programa" },
+    { href: "#learn", label: "Aprender" },
+    { href: "#participate", label: "Participar" },
+  ];
+
   return (
     <div className="bg-pcd-page-bg">
       <Header
-        isScrolled={isHeaderScrolled}
+        navLinks={mainNavLinks}
         pages={pages}
         activePath={activePath}
         navigateTo={navigateTo}

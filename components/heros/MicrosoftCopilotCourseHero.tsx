@@ -6,7 +6,7 @@ import React from 'react';
 import RemixIcon from '../ui/RemixIcon';
 
 const MicrosoftCopilotCourseHero = () => (
-    <section className="relative py-24 md:py-32 bg-gradient-to-br from-pcd-blue/10 to-cyan-50 border-b border-pcd-border overflow-hidden">
+    <section className="relative py-24 md:py-32 bg-gradient-to-br from-pcd-accent/10 to-pcd-accent-light/30 border-b border-pcd-border overflow-hidden">
         <div className="absolute top-0 right-0 -z-0">
             <RemixIcon name="windows-fill" className="text-[300px] text-pcd-blue/5 -rotate-12 translate-x-1/4 translate-y-1/4" />
         </div>

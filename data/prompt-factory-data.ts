@@ -17,7 +17,7 @@ export const recipes: Recipe[] = [
   // --- Category: Gerar Ideias ---
   {
     id: 'rec-1',
-    categoryId: 'cat-1',
+    category_id: 'cat-1',
     title: 'Brainstorm para Projetos',
     icon_name: 'flask-line',
     template: 'Cria uma lista de [numero] ideias para um [projeto] sobre [tema]. O tom deve ser [tom].',
@@ -42,7 +42,7 @@ export const recipes: Recipe[] = [
   // --- Category: Escrever E-mails ---
   {
     id: 'rec-2',
-    categoryId: 'cat-2',
+    category_id: 'cat-2',
     title: 'E-mail para Marcar Reunião',
     icon_name: 'calendar-2-line',
     template: 'Escreve um e-mail [formalidade] para [destinatario] para marcar uma reunião sobre [assunto]. Sugere [numero_sugestoes] horários possíveis.',
@@ -67,7 +67,7 @@ export const recipes: Recipe[] = [
    // --- Category: Criar Imagens ---
   {
     id: 'rec-3',
-    categoryId: 'cat-3',
+    category_id: 'cat-3',
     title: 'Cenário de Fantasia',
     icon_name: 'sword-line',
     template: 'Gera uma imagem de [criatura], [acao], num/a [ambiente]. O estilo deve ser [estilo_artistico].',

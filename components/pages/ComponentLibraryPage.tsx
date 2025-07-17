@@ -1,4 +1,3 @@
-
 /**
  * @license
  * SPDX-License-Identifier: Apache-2.0
@@ -14,9 +13,8 @@ import type { PageProps } from '../App';
 
 // All components to be showcased
 // Layout & Structure
-import AppHeader from '../layout/AppHeader';
-import AppFooter from '../layout/AppFooter';
 import Header from '../Header';
+import AppFooter from '../layout/AppFooter';
 import Footer from '../Footer';
 import PageSection from '../layout/PageSection';
 import LearningUnitLayout from '../learning/LearningUnitLayout';
@@ -267,10 +265,12 @@ const ComponentLibraryPage = ({ navigateTo, pages, activePath }: PageProps) => {
 
     return (
         <div className="bg-white">
-            <AppHeader
-                navigateTo={navigateTo!}
-                title="Biblioteca de Componentes"
+            <Header
+                pageTitle="Biblioteca de Componentes"
                 navLinks={navLinks}
+                navigateTo={navigateTo}
+                pages={pages}
+                activePath={activePath}
             />
 
             <main>
@@ -291,6 +291,26 @@ const ComponentLibraryPage = ({ navigateTo, pages, activePath }: PageProps) => {
                                              <div className="flex-1 text-center">
                                                 <div className="w-full h-16 rounded-lg shadow-inner border border-gray-200 bg-pcd-accent-light"></div>
                                                 <p className="mt-2 font-semibold text-xs text-pcd-text-dark">Light</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </ComponentShowcase>
+
+                        <ComponentShowcase name="Cores de Gradiente" path="index.css" description="Os gradientes principais e de destaque para cada tema. Usados nos heróis e em elementos de chamada de ação." isFullWidth>
+                            <div className="space-y-6">
+                                {themeColors.map(theme => (
+                                    <div key={theme.name} className={`p-4 rounded-lg border ${theme.theme}`}>
+                                        <h5 className="font-bold text-lg mb-2 text-pcd-text-dark">{theme.name}</h5>
+                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div className="text-center">
+                                                <div className="w-full h-24 rounded-lg shadow-inner bg-pcd-gradient-main"></div>
+                                                <p className="mt-2 font-semibold text-xs text-pcd-text-dark">Main</p>
+                                            </div>
+                                            <div className="text-center">
+                                                <div className="w-full h-24 rounded-lg shadow-inner bg-pcd-gradient-accent"></div>
+                                                <p className="mt-2 font-semibold text-xs text-pcd-text-dark">Accent</p>
                                             </div>
                                         </div>
                                     </div>
@@ -459,13 +479,16 @@ const ComponentLibraryPage = ({ navigateTo, pages, activePath }: PageProps) => {
                     </section>
                     
                     <section id="sections" className="pt-12">
-                        <ComponentShowcase name="Header (Página Principal)" path="components/Header.tsx" description="O cabeçalho da página principal, que muda de aparência com o scroll e pode incluir um menu de navegação de desenvolvimento." isFullWidth>
+                        <ComponentShowcase name="Header (Unificado)" path="components/Header.tsx" description="O novo cabeçalho unificado. Muda de aparência com o scroll na página principal e adapta-se a páginas internas." isFullWidth>
                             <div className="w-full space-y-4">
-                               <div className="bg-gray-800 p-2 rounded-lg">
-                                    <Header isScrolled={false} pages={pages} activePath={activePath} navigateTo={dummyNavigate} />
+                               <div className="relative p-2 rounded-lg bg-gray-800 h-24">
+                                    <Header navLinks={navLinks} pages={pages} activePath={activePath} navigateTo={dummyNavigate} />
                                </div>
-                               <div className="bg-white p-2 rounded-lg shadow-md">
-                                    <Header isScrolled={true} pages={pages} activePath={activePath} navigateTo={dummyNavigate} />
+                               <div className="relative p-2 rounded-lg bg-white shadow-md h-24">
+                                    <Header isScrolled={true} navLinks={navLinks} pages={pages} activePath={activePath} navigateTo={dummyNavigate} />
+                               </div>
+                               <div className="relative p-2 rounded-lg bg-white shadow-md h-24">
+                                    <Header pageTitle="Página Interna" navLinks={navLinks} pages={pages} activePath={activePath} navigateTo={dummyNavigate} />
                                </div>
                             </div>
                         </ComponentShowcase>
@@ -473,10 +496,6 @@ const ComponentLibraryPage = ({ navigateTo, pages, activePath }: PageProps) => {
                         <ComponentShowcase name="Footer (Página Principal)" path="components/Footer.tsx" description="O rodapé principal da aplicação." isFullWidth>
                              <Footer onShowAllResources={dummyOnShowAll} />
                         </ComponentShowcase>
-
-                         <ComponentShowcase name="AppHeader (Páginas Internas)" path="components/layout/AppHeader.tsx" description="O cabeçalho usado em todas as páginas internas, com um botão de 'voltar'." isFullWidth>
-                             <AppHeader navigateTo={dummyNavigate} title="Título da Página" navLinks={[{ href: '#', label: 'Link' }]} />
-                         </ComponentShowcase>
 
                          <ComponentShowcase name="AppFooter (Páginas Internas)" path="components/layout/AppFooter.tsx" description="O rodapé simplificado para as páginas internas." isFullWidth>
                              <AppFooter navigateTo={dummyNavigate} />
@@ -604,4 +623,5 @@ const ComponentLibraryPage = ({ navigateTo, pages, activePath }: PageProps) => {
         </div>
     );
 };
+
 export default ComponentLibraryPage;

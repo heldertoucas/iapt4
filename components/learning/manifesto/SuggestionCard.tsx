@@ -8,28 +8,24 @@ import type { ManifestoSuggestion } from '../../../hooks/useManifestoData';
 
 type SuggestionCardProps = {
     suggestion: ManifestoSuggestion;
-    onVote: (suggestionId: string, voteType: 'up', onVoteSuccess?: () => void) => void;
-    onVoteSuccess: () => void;
+    onVote: (suggestionId: string, voteType: 'up') => void;
 };
 
-const SuggestionCard = ({ suggestion, onVote, onVoteSuccess }: SuggestionCardProps) => {
+const SuggestionCard = ({ suggestion, onVote }: SuggestionCardProps) => {
     const [voted, setVoted] = useState<boolean>(false);
-    const [localUpvotes, setLocalUpvotes] = useState(suggestion.upvotes);
 
     useEffect(() => {
         const storedVote = localStorage.getItem(`vote_suggestion_${suggestion.id}`);
         if (storedVote) {
             setVoted(true);
         }
-        setLocalUpvotes(suggestion.upvotes);
-    }, [suggestion]);
+    }, [suggestion.id]);
 
     const handleVote = () => {
         if (voted) return;
         setVoted(true);
-        setLocalUpvotes(prev => prev + 1); // Optimistic UI update
         localStorage.setItem(`vote_suggestion_${suggestion.id}`, 'true');
-        onVote(suggestion.id, 'up', onVoteSuccess);
+        onVote(suggestion.id, 'up');
     };
 
     const formattedDate = new Date(suggestion.created_at).toLocaleDateString('pt-PT', {
@@ -67,7 +63,7 @@ const SuggestionCard = ({ suggestion, onVote, onVoteSuccess }: SuggestionCardPro
                 >
                     <RemixIcon name="arrow-up-s-line" className="text-xl" />
                     <span>Apoiar</span>
-                    <span className="font-bold">{localUpvotes}</span>
+                    <span className="font-bold">{suggestion.upvotes}</span>
                 </button>
                  {voted && <p className="text-center sm:text-left text-xs text-gray-500 mt-2">Obrigado por apoiar!</p>}
             </div>

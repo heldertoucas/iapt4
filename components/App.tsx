@@ -4,14 +4,10 @@
 */
 import React, { useState, useEffect, ComponentType } from 'react';
 import HomePage from './pages/HomePage';
-import HomePage_Archive from './pages/HomePage_Archive';
 import PromptFactoryPage from './pages/PromptFactoryPage';
-import CopilotCoursePage from './pages/CopilotCoursePage';
-import MicrosoftCopilotCoursePage from './pages/MicrosoftCopilotCoursePage';
 import ManifestoCoCreationPage from './pages/ManifestoCoCreationPage';
 import ComponentLibraryPage from './pages/ComponentLibraryPage';
-import MicrosoftCopilotCoursePage2 from './pages/MicrosoftCopilotCoursePage2'; // Import the new course page
-import MicrosoftCopilotCoursePage3 from './pages/MicrosoftCopilotCoursePage3';
+import MicrosoftCopilotCoursePage3 from './pages/MicrosoftCopilotCoursePage3'; // Import the new course page
 import { appConfig } from '../src/config/appConfig';
 
 // Define the shape of a page definition, used for routing and navigation.
@@ -32,13 +28,9 @@ export type PageProps = {
 // Define all possible pages with their feature flags.
 const allPages: PageDefinition[] = [
     { label: "Página Principal", path: '#/', component: HomePage },
-    { label: "arquivo main", path: '#/home-archive', component: HomePage_Archive },
     { label: "Co-criar o Manifesto", path: '#/manifesto-cocreate', component: ManifestoCoCreationPage, featureFlag: 'enableManifestoCoCreation' },
     { label: "Fábrica de Prompts", path: '#/prompt-factory', component: PromptFactoryPage },
-    { label: "Curso ✨Descobrir a IA", path: '#/copilot-course', component: CopilotCoursePage },
-    { label: "Curso MS Copilot", path: '#/mscopilot-course', component: MicrosoftCopilotCoursePage },
-    { label: "Curso MS Copilot V2", path: '#/mscopilot-course-v2', component: MicrosoftCopilotCoursePage2 }, // Add the new course page
-    { label: "Curso MS Copilot V3", path: '#/mscopilot-course-v3', component: MicrosoftCopilotCoursePage3 },
+    { label: "Curso MS Copilot V3", path: '#/mscopilot-course-v3', component: MicrosoftCopilotCoursePage3 }, // Add the new course page
     { label: "Biblioteca de Componentes", path: '#/component-library', component: ComponentLibraryPage, featureFlag: 'enableComponentLibrary' },
 ];
 

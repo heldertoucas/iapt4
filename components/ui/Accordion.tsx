@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import RemixIcon from './RemixIcon';
 
 type AccordionProps = {
-    title: string;
+    title: React.ReactNode;
     children: React.ReactNode;
 };
 

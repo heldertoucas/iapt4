@@ -3,14 +3,14 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 import React, { useState } from 'react';
-import AppHeader from '../layout/AppHeader';
+import Header from '../Header';
 import AppFooter from '../layout/AppFooter';
 import PromptFactoryHero from '../heros/PromptFactoryHero';
 import PageSection from '../layout/PageSection';
 import PromptFactoryApp from '../learning/prompt-factory/PromptFactoryApp';
 import type { PageProps } from '../App';
 
-const PromptFactoryPage = ({ navigateTo }: PageProps) => {
+const PromptFactoryPage = ({ navigateTo, pages, activePath }: PageProps) => {
     const [showApp, setShowApp] = useState(false);
 
     const navLinks = [
@@ -27,10 +27,12 @@ const PromptFactoryPage = ({ navigateTo }: PageProps) => {
 
     return (
         <div className="bg-pcd-page-bg">
-            <AppHeader
-                navigateTo={navigateTo!}
-                title="Fábrica de Prompts"
+            <Header
+                pageTitle="Fábrica de Prompts"
                 navLinks={navLinks}
+                navigateTo={navigateTo}
+                pages={pages}
+                activePath={activePath}
             />
             <main>
                 <PromptFactoryHero onStart={handleStart} />

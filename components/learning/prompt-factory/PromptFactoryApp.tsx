@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 import React, { useState, useCallback } from 'react';
-import type { Category, Recipe } from '../../../types/prompt-factory';
-import usePromptFactoryData from '../../../hooks/usePromptFactoryData';
+import { usePromptFactoryData } from '../../../hooks/usePromptFactoryData';
+import type { Recipe } from '../../../types/prompt-factory';
 import { api } from '../../../services/prompt-factory-api';
 import { useGamification } from '../../../hooks/useGamification';
 import ProgressBar from './ProgressBar';
@@ -14,13 +14,12 @@ import PromptBuilder from './PromptBuilder';
 import GenerationResult from './GenerationResult';
 import PointsTracker from './PointsTracker';
 import GamificationNotification from './GamificationNotification';
-import MedalPopup from './MedalPopup';
+import RemixIcon from '../../ui/RemixIcon'; // Added import for loader
 
 
 type Step = 'category' | 'recipe' | 'create' | 'result';
 
 const PromptFactoryApp = () => {
-    const { categories, recipes, isLoading: isDataLoading } = usePromptFactoryData();
     const [currentStep, setCurrentStep] = useState<Step>('category');
     const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
     const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
@@ -29,6 +28,9 @@ const PromptFactoryApp = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [generatedOutput, setGeneratedOutput] = useState('');
+    
+    // Fetch data from Supabase
+    const { categories, recipes, isLoading: isDataLoading, error: dataError } = usePromptFactoryData();
 
     const { points, addPoint, isMedalUnlocked, goal, notification, dismissNotification } = useGamification();
 
@@ -103,14 +105,11 @@ const PromptFactoryApp = () => {
 
 
     const renderStep = () => {
-        if (isDataLoading) {
-            return <p className="text-center">A carregar...</p>;
-        }
         switch (currentStep) {
             case 'category':
                 return <CategorySelector categories={categories} onSelectCategory={handleSelectCategory} />;
             case 'recipe':
-                const filteredRecipes = recipes.filter(r => r.categoryId === selectedCategoryId);
+                const filteredRecipes = recipes.filter(r => r.category_id === selectedCategoryId);
                 const selectedCategory = categories.find(c => c.id === selectedCategoryId);
                 return <RecipeSelector recipes={filteredRecipes} category={selectedCategory} onSelectRecipe={handleSelectRecipe} />;
             case 'create':
@@ -132,19 +131,40 @@ const PromptFactoryApp = () => {
         }
     };
 
+    const renderContent = () => {
+        if (isDataLoading) {
+            return (
+                <div className="flex flex-col items-center justify-center text-center flex-grow">
+                    <RemixIcon name="loader-4-line" className="text-4xl text-pcd-accent animate-spin mb-4" />
+                    <h3 className="text-xl font-semibold text-pcd-text-dark">A carregar receitas...</h3>
+                    <p className="text-pcd-text-light">A preparar a magia da IA!</p>
+                </div>
+            );
+        }
+    
+        if (dataError) {
+            return (
+                <div className="flex flex-col items-center justify-center text-center flex-grow bg-red-50 p-6 rounded-lg">
+                    <RemixIcon name="error-warning-line" className="text-4xl text-red-500 mb-4" />
+                    <h3 className="text-xl font-semibold text-red-700">Ocorreu um Erro</h3>
+                    <p className="text-red-600">{dataError}</p>
+                </div>
+            );
+        }
+
+        return <div className="flex-grow mt-12">{renderStep()}</div>
+    };
+
     return (
         <div className="bg-pcd-card-bg p-6 md:p-8 rounded-2xl shadow-lg border-t-2 border-pcd-accent-light min-h-[600px] flex flex-col">
-            {notification && isMedalUnlocked && notification.includes('Mestre de Prompts') && (
-                <MedalPopup message={notification} onClose={dismissNotification} />
-            )}
-            {notification && !(isMedalUnlocked && notification.includes('Mestre de Prompts')) && (
+            {notification &&
                 <div className="mb-8">
                     <GamificationNotification
                         message={notification}
                         onClose={dismissNotification}
                     />
                 </div>
-            )}
+            }
             <div className="flex justify-between items-center">
                 <div className="w-1/2">
                     <ProgressBar currentStep={currentStep} onStepClick={handleStepClick} />
@@ -153,9 +173,7 @@ const PromptFactoryApp = () => {
                     <PointsTracker points={points} goal={goal} isMedalUnlocked={isMedalUnlocked} />
                 </div>
             </div>
-            <div className="flex-grow mt-12">
-                {renderStep()}
-            </div>
+            {renderContent()}
         </div>
     );
 };

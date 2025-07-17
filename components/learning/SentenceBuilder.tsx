@@ -32,13 +32,13 @@ const SentenceBuilder = () => {
                         <button
                             key={word}
                             onClick={() => handleWordClick(word)}
-                            className="p-3 bg-pcd-card-bg border-2 border-pcd-border rounded-lg hover:border-pcd-accent transition"
+                            className="p-4 bg-pcd-card-bg border-2 border-pcd-border rounded-lg hover:border-pcd-accent transition text-base"
                         >
                             {word}
                         </button>
                     ))
                 ) : (
-                    <p className="text-pcd-green font-semibold col-span-full text-center">
+                    <p className="text-pcd-green font-semibold col-span-full text-center text-base">
                         Frase completa! Bom trabalho.
                     </p>
                 )}

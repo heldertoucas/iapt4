@@ -4,41 +4,15 @@
 */
 import React from 'react';
 import PageSection from '../layout/PageSection';
-import Carousel from '../ui/Carousel';
-import GuidelineCard from '../ui/GuidelineCard';
+import RemixIcon from '../ui/RemixIcon';
+import AnimatedSection from '../AnimatedSection';
 
 const ResponsibleAiUsageSection = () => {
     const guidelines = [
-        {
-            icon: 'brain-line',
-            title: 'Pense criticamente e mantenha-se curioso.',
-            description: 'Não deixe que a IA decida por si. Pode dar respostas incorretas ou baseadas em preconceitos.'
-        },
-        {
-            icon: 'shield-check-line',
-            title: 'Seja claro sobre quando usa IA.',
-            description: 'Reconhecer o uso da IA é sinal de transparência e honestidade.'
-        },
-        {
-            icon: 'user-heart-line',
-            title: 'Respeite os outros ao usar IA.',
-            description: 'Use a IA para colaborar, não para espalhar desinformação ou ludibriar.'
-        },
-        {
-            icon: 'lock-password-line',
-            title: 'Proteja a sua privacidade.',
-            description: 'Nunca introduza dados pessoais, senhas ou informações confidenciais na IA.'
-        },
-        {
-            icon: 'megaphone-line',
-            title: 'Avise se vir algo preocupante.',
-            description: 'Se encontrar conteúdo inapropriado, use a opção "denunciar" na página da IA.'
-        },
-        {
-            icon: 'book-copy-line',
-            title: 'Use a IA para aprender, não para copiar.',
-            description: 'Valorize sempre o seu pensamento e as suas palavras.'
-        },
+        { icon: 'brain-line', title: 'Pense criticamente.', description: 'Não deixe que a IA decida por si. Pode dar respostas incorretas ou baseadas em preconceitos.' },
+        { icon: 'shield-check-line', title: 'Seja transparente.', description: 'Reconhecer o uso da IA é sinal de honestidade e confiança.' },
+        { icon: 'user-heart-line', title: 'Respeite os outros.', description: 'Use a IA para colaborar, não para espalhar desinformação ou ludibriar.' },
+        { icon: 'lock-password-line', title: 'Proteja a privacidade.', description: 'Nunca introduza dados pessoais ou informações confidenciais na IA.' },
     ];
 
     const title = <>Uso Responsável da <span className="text-pcd-accent">IA</span></>;
@@ -46,12 +20,39 @@ const ResponsibleAiUsageSection = () => {
 
     return (
         <PageSection id="responsible-use" title={title} subtitle={subtitle} className="bg-pcd-bg-soft">
-            <div className="max-w-3xl mx-auto bg-pcd-card-bg rounded-2xl shadow-lg border border-pcd-border">
-                <Carousel>
-                    {guidelines.map(guideline => (
-                        <GuidelineCard key={guideline.title} {...guideline} />
+            <div className="grid lg:grid-cols-3 gap-12 items-center mt-12">
+                {/* Left Column */}
+                <div className="space-y-8">
+                    {guidelines.slice(0, 2).map((item, index) => (
+                        <AnimatedSection key={item.title} delay={`${index * 0.1}s`}>
+                            <div className="text-right">
+                                <RemixIcon name={item.icon} className="text-3xl text-pcd-accent mb-2" />
+                                <h4 className="text-xl font-bold text-pcd-text-dark">{item.title}</h4>
+                                <p className="text-pcd-text-light mt-1">{item.description}</p>
+                            </div>
+                        </AnimatedSection>
                     ))}
-                </Carousel>
+                </div>
+                {/* Center Image */}
+                 <AnimatedSection delay="0.1s">
+                    <img
+                        src="https://cloud1.email2go.io/97fc9b260a90d9c0aca468d2e6536980/40101459ba768dd929c882d463375fe9069750284a22cee9651ca1093500c85b.png"
+                        alt="Ilustração de segurança e privacidade na IA"
+                        className="w-full h-auto"
+                    />
+                </AnimatedSection>
+                {/* Right Column */}
+                <div className="space-y-8">
+                    {guidelines.slice(2, 4).map((item, index) => (
+                        <AnimatedSection key={item.title} delay={`${(index + 2) * 0.1}s`}>
+                            <div className="text-left">
+                                <RemixIcon name={item.icon} className="text-3xl text-pcd-accent mb-2" />
+                                <h4 className="text-xl font-bold text-pcd-text-dark">{item.title}</h4>
+                                <p className="text-pcd-text-light mt-1">{item.description}</p>
+                            </div>
+                        </AnimatedSection>
+                    ))}
+                </div>
             </div>
         </PageSection>
     );

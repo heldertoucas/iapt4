@@ -21,23 +21,14 @@ type GenerationResultProps = {
 };
 
 const GenerationResult = ({ recipe, finalPrompt, generatedOutput, isLoading, onRate, onGenerationSuccess, onReset }: GenerationResultProps) => {
-    const [advancedTip] = useState(
-        recipe.advanced_tips[Math.floor(Math.random() * recipe.advanced_tips.length)]
-    );
+    const [advancedTip] = useState(recipe.advanced_tips[Math.floor(Math.random() * recipe.advanced_tips.length)]);
     const [showSlowLoadMessage, setShowSlowLoadMessage] = useState(false);
-    const [celebrated, setCelebrated] = useState(false);
     const resultBoxRef = useRef<HTMLDivElement>(null);
     
     useEffect(() => {
-        if (isLoading) {
-            setCelebrated(false);
-            return;
-        }
-
-        if (!celebrated && generatedOutput) {
-            setCelebrated(true);
+        if (!isLoading && generatedOutput) {
             onGenerationSuccess();
-            // Wrap confetti in a timeout to ensure the DOM is painted
+             // Wrap confetti in a timeout to ensure the DOM is painted
             setTimeout(() => {
                 if (resultBoxRef.current && typeof confetti === 'function') {
                     const rect = resultBoxRef.current.getBoundingClientRect();
@@ -45,15 +36,15 @@ const GenerationResult = ({ recipe, finalPrompt, generatedOutput, isLoading, onR
                     const y = (rect.top + rect.height / 2) / window.innerHeight;
 
                     confetti({
-                        particleCount: 80,
-                        spread: 90,
+                        particleCount: 200,
+                        spread: 120,
                         origin: { x, y },
                         zIndex: 9999,
                     });
                 }
             }, 100);
         }
-    }, [isLoading, generatedOutput, onGenerationSuccess, celebrated]);
+    }, [isLoading, generatedOutput, onGenerationSuccess]);
 
     useEffect(() => {
         let timer: number;

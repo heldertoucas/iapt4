@@ -15,7 +15,7 @@ export type Placeholder = {
 
 export type Recipe = {
   id: string;
-  categoryId: string;
+  category_id: string;
   title: string;
   icon_name: string;
   template: string;

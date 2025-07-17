@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 import React, { useState, useEffect, useRef } from 'react';
-import AppHeader from '../layout/AppHeader';
+import Header from '../Header';
 import AppFooter from '../layout/AppFooter';
 import LearningUnitLayout from '../learning/LearningUnitLayout';
 import MissionBlock, { MissionCategory } from '../learning/MissionBlock';
@@ -131,7 +131,7 @@ const CourseSidebar = ({ points, unlockedBlocks, learningBlocks, displayMode = '
     );
 };
 
-const MicrosoftCopilotCoursePage2 = ({ navigateTo }: PageProps) => {
+const MicrosoftCopilotCoursePage2 = ({ navigateTo, pages, activePath }: PageProps) => {
     const navLinks = [ { href: "#blocos", label: "Módulos V2" } ];
     const { points, addPoint } = useCopilotCourse2Gamification();
     const [unlockedBlocks, setUnlockedBlocks] = useState(1);
@@ -201,7 +201,7 @@ const MicrosoftCopilotCoursePage2 = ({ navigateTo }: PageProps) => {
                     </div>
                     <div className="flex-1">
                         <p className="text-lg text-pcd-text-light leading-relaxed mb-4">A teoria é importante, mas a prática é essencial! Agora que já domina os conceitos, está na hora de experimentar na nossa ferramenta interativa "Fábrica de Prompts".</p>
-                        <a href="#/prompt-factory" onClick={(e) => { e.preventDefault(); navigateTo('#/prompt-factory'); }} className="mt-4 inline-block px-6 py-3 bg-pcd-roxo text-white rounded-full font-semibold hover:bg-purple-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-lg">
+                        <a href="#/prompt-factory" onClick={(e) => { e.preventDefault(); navigateTo && navigateTo('#/prompt-factory'); }} className="mt-4 inline-block px-6 py-3 bg-pcd-roxo text-white rounded-full font-semibold hover:bg-purple-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-lg">
                             Ir para a Fábrica de Prompts
                         </a>
                     </div>
@@ -250,9 +250,15 @@ const MicrosoftCopilotCoursePage2 = ({ navigateTo }: PageProps) => {
     
     return (
         <div className="bg-pcd-page-bg">
-            <AppHeader navigateTo={navigateTo} title="Curso: MS Copilot V2" navLinks={navLinks} />
+            <Header
+                pageTitle="Curso: MS Copilot V2"
+                navLinks={navLinks}
+                navigateTo={navigateTo}
+                pages={pages}
+                activePath={activePath}
+            />
             <main>
-                <MicrosoftCopilotCourseHeroV2 navigateTo={navigateTo} />
+                <MicrosoftCopilotCourseHeroV2 navigateTo={navigateTo!} />
                 <section id="blocos" className="bg-pcd-page-bg py-20">
                      {appConfig.featureFlags.useGamificationSidebar ? (
                         <LearningUnitLayout sidebar={
@@ -278,7 +284,7 @@ const MicrosoftCopilotCoursePage2 = ({ navigateTo }: PageProps) => {
                      )}
                 </section>
             </main>
-            <AppFooter navigateTo={navigateTo} />
+            <AppFooter navigateTo={navigateTo!} />
         </div>
     );
 };

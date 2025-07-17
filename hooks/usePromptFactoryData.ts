@@ -2,63 +2,66 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../services/supabaseClient';
 import type { Category, Recipe } from '../types/prompt-factory';
 import { categories as fallbackCategories, recipes as fallbackRecipes } from '../data/prompt-factory-data';
 
 export const usePromptFactoryData = () => {
-    const [categories, setCategories] = useState<Category[]>(fallbackCategories);
-    const [recipes, setRecipes] = useState<Recipe[]>(fallbackRecipes);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [recipes, setRecipes] = useState<Recipe[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setIsLoading(true);
-            if (!supabase) {
-                console.log('Supabase client not available, using fallback data for prompt factory.');
-                setIsLoading(false);
-                return;
+    const fetchData = useCallback(async () => {
+        setIsLoading(true);
+        setError(null);
+
+        if (!supabase) {
+            console.warn("Supabase client not configured. Using fallback dummy data.");
+            setCategories(fallbackCategories);
+            setRecipes(fallbackRecipes);
+            setIsLoading(false);
+            return;
+        }
+
+        try {
+            const [categoriesResponse, recipesResponse] = await Promise.all([
+                supabase.from('categories').select('*').order('title', { ascending: true }),
+                supabase.from('recipes').select('*').order('id', { ascending: true })
+            ]);
+
+            const { data: categoriesData, error: categoriesError } = categoriesResponse;
+            if (categoriesError) throw new Error(`Error fetching categories: ${categoriesError.message}`);
+            
+            // Check if data is empty, which can happen with a valid connection but empty tables
+            if (!categoriesData || categoriesData.length === 0) {
+                 throw new Error("Categories table is empty or could not be read.");
             }
+            setCategories(categoriesData);
 
-            try {
-                const { data: catData, error: catError } = await supabase
-                    .from('categories')
-                    .select('*');
-                if (catError) throw catError;
-                if (catData) setCategories(catData as Category[]);
-
-                const { data: recData, error: recError } = await supabase
-                    .from('recipes')
-                    .select('*');
-                if (recError) throw recError;
-                if (recData) {
-                    const mapped = recData.map((r: any) => {
-                        const { category_id, ...rest } = r;
-                        return {
-                            ...rest,
-                            categoryId: category_id,
-                        };
-                    });
-                    setRecipes(mapped as Recipe[]);
-                }
-
-                setError(null);
-            } catch (err: any) {
-                console.error('Failed to fetch prompt factory data from Supabase:', err.message || err);
-                setError('Não foi possível carregar as receitas.');
-                setCategories(fallbackCategories);
-                setRecipes(fallbackRecipes);
-            } finally {
-                setIsLoading(false);
+            const { data: recipesData, error: recipesError } = recipesResponse;
+            if (recipesError) throw new Error(`Error fetching recipes: ${recipesError.message}`);
+             if (!recipesData || recipesData.length === 0) {
+                 throw new Error("Recipes table is empty or could not be read.");
             }
-        };
+            setRecipes(recipesData);
 
-        fetchData();
+        } catch (err: any) {
+            console.error("Failed to fetch data from Supabase, using fallback dummy data:", err);
+            // In case of any error, gracefully fallback to dummy data
+            setCategories(fallbackCategories);
+            setRecipes(fallbackRecipes);
+            // We don't set a user-facing error message, allowing the app to function with fallback data.
+            // A developer can see the error in the console.
+        } finally {
+            setIsLoading(false);
+        }
     }, []);
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
 
     return { categories, recipes, isLoading, error };
 };
-
-export default usePromptFactoryData;

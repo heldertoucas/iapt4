@@ -6,7 +6,7 @@ import React from 'react';
 import RemixIcon from '../ui/RemixIcon';
 
 const ManifestoCoCreationHero = () => (
-    <section className="relative py-24 md:py-32 bg-gradient-to-br from-pcd-roxo to-pcd-pink border-b border-pcd-border overflow-hidden">
+    <section className="relative py-24 md:py-32 bg-pcd-gradient-accent border-b border-pcd-border overflow-hidden">
         <div className="absolute inset-0 z-0 opacity-20">
             <div className="blob-1 absolute top-1/4 left-1/4 w-96 h-96 bg-white/10 rounded-full filter blur-3xl"></div>
             <div className="blob-2 absolute bottom-1/4 right-1/4 w-96 h-96 bg-white/10 rounded-full filter blur-3xl"></div>

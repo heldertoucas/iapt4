@@ -26,11 +26,11 @@ const PromptCard = ({ title, description, promptText }: PromptCardProps) => {
     };
 
     return (
-        <div className="bg-pcd-card-bg p-6 rounded-xl shadow-md border border-pcd-border hover:shadow-lg hover:border-pcd-blue transition-all duration-300 flex flex-col h-full">
+        <div className="bg-white p-6 rounded-xl shadow-md border border-pcd-border hover:shadow-lg hover:border-pcd-blue transition-all duration-300 flex flex-col h-full">
             <div className="flex-grow">
                 <h4 className="font-bold text-lg text-pcd-text-dark">{title}</h4>
-                <p className="text-sm text-pcd-text-light mt-1 mb-3">{description}</p>
-                <p className="text-sm text-gray-700 bg-pcd-bg-soft p-3 rounded-md italic border border-pcd-border">"{promptText}"</p>
+                <p className="text-base text-pcd-text-light mt-1 mb-3">{description}</p>
+                <p className="text-base text-gray-700 bg-pcd-bg-soft p-3 rounded-md italic border border-pcd-border">"{promptText}"</p>
             </div>
             <button
                 onClick={handleCopyAndOpen}

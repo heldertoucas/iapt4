@@ -2,7 +2,7 @@
 <html lang="pt-PT">
 <head>
   <meta charset="UTF-8" />
-  <!-- Favicon removed to avoid 404 errors -->
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IA para Todos | Um Manifesto para uma IA Humana</title>
   <meta name="description" content="Junte-se ao movimento por uma IA acessível, transparente e ética que beneficie todos." />
@@ -15,22 +15,8 @@
   <!-- Remix Icon Library -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
 
-  <!-- Suppress Tailwind CDN warning -->
-  <script>
-    (function() {
-      const originalWarn = console.warn;
-      console.warn = function(msg, ...args) {
-        if (typeof msg === 'string' && msg.includes('cdn.tailwindcss.com')) return;
-        originalWarn.call(console, msg, ...args);
-      };
-    })();
-  </script>
-
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Canvas Confetti for celebratory animations -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.1/dist/confetti.browser.min.js"></script>
 
   <!-- App specific styles -->
   <link rel="stylesheet" href="index.css">
@@ -66,6 +52,10 @@
                     'pcd-accent': 'var(--pcd-accent-color)',
                     'pcd-accent-light': 'var(--pcd-accent-light-color)',
                 },
+                backgroundImage: {
+                    'pcd-gradient-main': 'var(--pcd-gradient-main)',
+                    'pcd-gradient-accent': 'var(--pcd-gradient-accent)',
+                },
                 borderRadius: { '4xl': '2rem' },
                 boxShadow: {
                     'card': '0 4px 16px 0 rgba(0, 0, 0, 0.07)',
@@ -97,19 +87,20 @@
 <script type="importmap">
 {
   "imports": {
-    "react": "https://esm.sh/react@^19.1.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
-    "react-dom/client": "https://esm.sh/react-dom@^19.1.0/client",
-    "react/": "https://esm.sh/react@^19.1.0/",
+    "react": "https://esm.sh/react@^18.2.0",
+    "react-dom/": "https://esm.sh/react-dom@^18.2.0/",
+    "react/": "https://esm.sh/react@^18.2.0/",
     "marked": "https://esm.sh/marked@^16.0.0",
     "@google/genai": "https://esm.sh/@google/genai@^1.8.0",
     "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@^2.50.3"
   }
 }
 </script>
+<link rel="stylesheet" href="/index.css">
 </head>
 <body>
   <div id="root"></div>
   <script type="module" src="index.tsx"></script>
+<script type="module" src="/index.tsx"></script>
 </body>
 </html>

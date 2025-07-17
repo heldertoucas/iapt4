@@ -7,7 +7,6 @@ import React from 'react';
 // --- Reusable SVG Logo Component (Static Version) ---
 const StaticLogo = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 2014 2014" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <title>Logótipo IA para Todos</title>
     <defs>
       <linearGradient id="paint0_static" x1="211.02" y1="1344.54" x2="1912.2" y2="1339.6" gradientUnits="userSpaceOnUse">
         <stop stopColor="#5EE8D1"/>
@@ -22,4 +21,5 @@ const StaticLogo = ({ className }: { className?: string }) => (
     <path d="M1278.21 374.933C1272.53 373.8 1272.59 363.7 1278.28 362.637C1340.98 350.928 1469.63 320.157 1533.32 256.475C1596.05 193.745 1626.85 67.9704 1638.95 4.30654C1640.04 -1.43879 1650.67 -1.4341 1651.76 4.31214C1663.8 67.975 1694.49 193.737 1757.17 256.475C1819.87 319.228 1945.62 349.991 2009.4 362.085C2015.15 363.176 2015.15 373.834 2009.4 374.919C1945.61 386.958 1819.88 417.611 1757.17 480.314C1693.5 543.981 1662.88 672.622 1651.23 735.419C1650.17 741.116 1640.05 741.188 1638.91 735.506C1626.19 671.877 1593.72 540.676 1533.32 480.314C1472.95 419.984 1341.74 387.603 1278.21 374.933Z" fill="url(#paint1_static)"/>
   </svg>
 );
+
 export default StaticLogo;

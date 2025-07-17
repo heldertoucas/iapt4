@@ -45,14 +45,14 @@ const Carousel = ({ children, withIndicators = false }: CarouselProps) => {
                 <>
                     <button
                         onClick={prev}
-                        className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg z-10 ml-5 focus:outline-none focus:ring-2 focus:ring-pcd-accent"
+                        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg z-10 focus:outline-none focus:ring-2 focus:ring-pcd-accent"
                         aria-label="Previous slide"
                     >
                         <RemixIcon name="arrow-left-s-line" className="h-6 w-6 text-gray-700" />
                     </button>
                     <button
                         onClick={next}
-                        className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg z-10 mr-5 focus:outline-none focus:ring-2 focus:ring-pcd-accent"
+                        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg z-10 focus:outline-none focus:ring-2 focus:ring-pcd-accent"
                         aria-label="Next slide"
                     >
                         <RemixIcon name="arrow-right-s-line" className="h-6 w-6 text-gray-700" />
@@ -75,4 +75,5 @@ const Carousel = ({ children, withIndicators = false }: CarouselProps) => {
         </div>
     );
 };
+
 export default Carousel;

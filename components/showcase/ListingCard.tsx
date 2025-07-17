@@ -15,9 +15,9 @@ const images = [
 ];
 
 const ListingCard = () => {
-  const slides = images.map((image, idx) => (
+  const slides = images.map((image) => (
     <div key={image} className="w-full h-56">
-        <img src={image} className="w-full h-full object-cover" alt={`Fotografia ${idx + 1} de uma propriedade para arrendamento`} />
+        <img src={image} className="w-full h-full object-cover" alt="Propriedade para alugar" />
     </div>
   ));
 

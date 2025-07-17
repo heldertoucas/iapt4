@@ -7,7 +7,7 @@ import useAnimatedSection from '../hooks/useAnimatedSection';
 
 // --- AnimatedSection Props Type ---
 export type AnimatedSectionProps = {
-    children: React.ReactNode;
+    children?: React.ReactNode; // Made optional
     className?: string;
     tag?: React.ElementType;
     delay?: string;

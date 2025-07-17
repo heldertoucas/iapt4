@@ -10,23 +10,16 @@ import RemixIcon from './ui/RemixIcon';
 
 const FaqSection = () => {
     const faqs = [
-        {
-            q: "O que é a iniciativa 'IA para Todos'?",
-            a: "É um programa municipal e um movimento de cidadãos que visa capacitar todas as pessoas com conhecimentos sobre Inteligência Artificial. Pretende contribuir para que IA seja desenvolvida e usada de forma ética, justa e responsável, com benefícios para toda a sociedade."
-        },
-        {
-            q: "Quem pode participar?",
-            a: "Todos os cidadãos com mais de 18 anos. Desde estudantes e profissionais a reformados e curiosos. Não é necessário ter qualquer conhecimento técnico. Pretende-se tornar a IA acessível a quem não é especialista."
-        },
-        {
-            q: "Como posso contribuir para uma IA para Todos?",
-            a: "Comece por participar nos cursos de formação profissional certificada, workshops e webinários IA para todos (consulte a secção 'Aprender'). Pode ainda assinar o Manifesto IA para Todos, ou até mesmo contribuir com as suas próprias ideias na secção 'Participar'."
-        },
+        { q: "O que é, exatamente, o 'IA para Todos'?", a: "É um programa municipal e um movimento de cidadãos que visa capacitar todas as pessoas com conhecimentos sobre Inteligência Artificial. Queremos garantir que a IA é desenvolvida e usada de forma ética, justa e que beneficia toda a sociedade." },
+        { q: "Quem pode participar?", a: "Absolutamente todos! Desde estudantes e profissionais a reformados e curiosos. Não é necessário ter qualquer conhecimento técnico. O nosso objetivo é precisamente tornar a IA acessível a quem não é especialista." },
+        { q: "Quais são os principais objetivos do programa?", a: "Os nossos objetivos são: 1) Aumentar a literacia digital sobre IA. 2) Promover um debate público informado. 3) Incentivar a co-criação de soluções de IA para o bem comum. 4) Defender um enquadramento ético e regulatório para a tecnologia." },
+        { q: "Como posso envolver-me?", a: "Existem várias formas! Pode começar por assinar o nosso manifesto, participar nos nossos workshops e eventos (consulte a secção 'Aprender'), ou até mesmo contribuir com as suas próprias ideias para o manifesto na secção 'Participar'." },
     ];
     return (
         <PageSection
             id="perguntas-frequentes"
             title={<>Perguntas <span className="text-pcd-accent">Frequentes</span></>}
+            subtitle="As suas questões, respondidas. Uma forma direta de perceber quem somos, o que fazemos e porquê."
             className="bg-pcd-bg-soft"
         >
             <div className="grid md:grid-cols-12 gap-8 items-center mt-12">

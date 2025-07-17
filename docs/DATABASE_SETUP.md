@@ -249,14 +249,14 @@ CREATE POLICY "Allow public read-only access to suggestions" ON public.manifesto
 CREATE POLICY "Allow users to insert their own suggestions" ON public.manifesto_suggestions FOR INSERT WITH CHECK (true);
 
 -- Criar uma função para incrementar a votação de uma receita de forma segura
-CREATE OR REPLACE FUNCTION increment_recipe_rating(recipe_id_in TEXT, rating_value INT)
+CREATE OR REPLACE FUNCTION increment_recipe_rating(recipe_id TEXT, rating_value INT)
 RETURNS void AS $$
 BEGIN
   UPDATE public.recipes
   SET
     total_score = total_score + rating_value,
     vote_count = vote_count + 1
-  WHERE id = recipe_id_in;
+  WHERE id = recipe_id;
 END;
 $$ LANGUAGE plpgsql;
 

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 import React, { useState, useEffect, useRef } from 'react';
-import AppHeader from '../layout/AppHeader';
+import Header from '../Header';
 import AppFooter from '../layout/AppFooter';
 import LearningUnitLayout from '../learning/LearningUnitLayout';
 import MissionBlock from '../learning/MissionBlock';
@@ -368,7 +368,7 @@ const CriticalAnalysisChallengeBlock = ({ onAnswer }: QuizProps) => (
         <InlineQuiz
             question="Qual das respostas é uma alucinação da IA?"
             options={[
-                { text: 'Resposta A: "Segundo o \"Instituto de Futurologia Aleatória\", em 2035, todos os funcionários serão substituídos por robôs que, além de fazerem o nosso trabalho, passarão o tempo a organizar festas de karaoke holográfico nos Paços do Concelho."', isCorrect: true },
+                { text: 'Resposta A: "Segundo o \'Instituto de Futurologia Aleatória\', em 2035, todos os funcionários serão substituídos por robôs que, além de fazerem o nosso trabalho, passarão o tempo a organizar festas de karaoke holográfico nos Paços do Concelho."', isCorrect: true },
                 { text: 'Resposta B: "A automação de tarefas repetitivas poderá libertar os funcionários para se focarem em funções que exigem mais criatividade e contacto humano."', isCorrect: false },
             ]}
             correctFeedback="Correto! A Resposta A é uma clara 'alucinação'. A IA inventou um instituto e um cenário para lhe dar a resposta que pediu. O perigo é que, se a mentira fosse mais subtil, poderíamos partilhá-la como um facto. A lição é simples: A IA não distingue a verdade da ficção. Verifique sempre qualquer fonte, nome ou dado que ela lhe apresente."
@@ -523,10 +523,10 @@ const CourseSidebar = ({ points, goal, unlockedGroups, courseStructure, displayM
     useEffect(() => {
         if (points > prevPoints.current) {
             setIsFizzing(true);
+            setDisplayedPoints(points); // Update points immediately for simultaneous progress bar animation
             const timer = setTimeout(() => {
-                setDisplayedPoints(points);
                 setIsFizzing(false);
-            }, 2000); 
+            }, 4000); // Match the new, longer fizzing animation duration
 
             return () => clearTimeout(timer);
         } else if (points !== prevPoints.current) {
@@ -626,7 +626,7 @@ const CourseSidebar = ({ points, goal, unlockedGroups, courseStructure, displayM
 
 // --- Main Page Component ---
 
-const MicrosoftCopilotCoursePage3 = ({ navigateTo }: PageProps) => {
+const MicrosoftCopilotCoursePage3 = ({ navigateTo, pages, activePath }: PageProps) => {
     const navLinks = [ { href: "#blocos", label: "Módulos do Curso" } ];
     const { points, addPoint, completeCourse, goal } = useCopilotCourse3Gamification();
     const [unlockedGroups, setUnlockedGroups] = useState(1);
@@ -744,7 +744,7 @@ const MicrosoftCopilotCoursePage3 = ({ navigateTo }: PageProps) => {
     }, [unlockedGroups]);
 
     const mainContent = (
-         <div className={`space-y-10 transition-opacity duration-700 pb-[50vh] ${animationStep >= 2 ? 'opacity-100' : 'opacity-0'}`}>
+         <div className={`space-y-10 transition-opacity duration-700 pb-[150vh] ${animationStep >= 2 ? 'opacity-100' : 'opacity-0'}`}>
             {courseStructure.map(group => {
                 const quizzesInGroup = group.blocks.filter(b => 'isQuiz' in b && b.isQuiz);
                 const allQuizzesInGroupAnswered = quizzesInGroup.length === 0 || quizzesInGroup.every(q => answeredQuizzes.has(q.id));
@@ -788,7 +788,7 @@ const MicrosoftCopilotCoursePage3 = ({ navigateTo }: PageProps) => {
                                     Terminar o Curso e Ver Pontuação
                                 </button>
                             </div>
-                        )}
+                         )}
                     </div>
                 );
             })}
@@ -804,7 +804,13 @@ const MicrosoftCopilotCoursePage3 = ({ navigateTo }: PageProps) => {
     
     return (
         <div className="bg-[#F9FFFD]">
-            <AppHeader navigateTo={navigateTo} title="Curso: Copilot para a CML" navLinks={navLinks} />
+            <Header
+                pageTitle="Curso: Copilot para a CML"
+                navLinks={navLinks}
+                navigateTo={navigateTo}
+                pages={pages}
+                activePath={activePath}
+            />
             <main>
                 <MicrosoftCopilotCourseHeroV3 />
                 <section id="blocos" className="bg-[#F9FFFD] pt-20">
@@ -841,7 +847,7 @@ const MicrosoftCopilotCoursePage3 = ({ navigateTo }: PageProps) => {
                      )}
                 </section>
             </main>
-            <AppFooter navigateTo={navigateTo} />
+            <AppFooter navigateTo={navigateTo!} />
         </div>
     );
 };

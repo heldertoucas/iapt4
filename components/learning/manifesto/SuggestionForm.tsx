@@ -7,12 +7,11 @@ import RemixIcon from '../../ui/RemixIcon';
 import Card from '../../ui/Card';
 
 type SuggestionFormProps = {
-  onSubmitSuggestion: (suggestionText: string, author?: string, onSubmissionSuccess?: () => void) => Promise<void>;
+  onSubmitSuggestion: (suggestionText: string, author?: string) => Promise<void>;
   prefilledText?: string;
-  onSubmissionSuccess?: () => void;
 };
 
-const SuggestionForm = ({ onSubmitSuggestion, prefilledText, onSubmissionSuccess }: SuggestionFormProps) => {
+const SuggestionForm = ({ onSubmitSuggestion, prefilledText }: SuggestionFormProps) => {
     const [suggestion, setSuggestion] = useState('');
     const [authorName, setAuthorName] = useState('');
     const [showSignaturePopup, setShowSignaturePopup] = useState(false);
@@ -51,7 +50,7 @@ const SuggestionForm = ({ onSubmitSuggestion, prefilledText, onSubmissionSuccess
 
         try {
             const author = isAnonymous ? undefined : authorName.trim();
-            await onSubmitSuggestion(suggestion, author, onSubmissionSuccess);
+            await onSubmitSuggestion(suggestion, author);
             setIsSubmitted(true);
             setSuggestion('');
             setAuthorName('');
@@ -107,7 +106,6 @@ const SuggestionForm = ({ onSubmitSuggestion, prefilledText, onSubmissionSuccess
                     value={suggestion}
                     onChange={(e) => setSuggestion(e.target.value)}
                     placeholder="Escreva aqui a sua sugestão para um novo princípio..."
-                    aria-label="Sugestão"
                     className="w-full h-32 p-3 border-2 border-pcd-border rounded-lg focus:border-pcd-accent focus:ring-1 focus:ring-pcd-accent transition"
                 />
                 <button

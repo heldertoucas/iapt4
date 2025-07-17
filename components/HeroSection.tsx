@@ -27,7 +27,7 @@ const HeroSection = () => {
 
     return (
         <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-pcd-blue via-pcd-roxo to-teal-500 z-0" />
+            <div className="absolute inset-0 bg-pcd-gradient-main z-0" />
             <div className="absolute inset-0 bg-black/30 z-0" />
             <div ref={heroContentRef} className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center hero-content-parallax">
                 <div className="flex justify-center items-center mb-4">

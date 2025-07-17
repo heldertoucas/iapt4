@@ -40,7 +40,7 @@ const FeatureGridSection = () => {
           <p className="mt-4 text-lg text-gray-600">
             Build fully functional accessible web applications faster than ever – Mantine includes more than 120 customizable components and hooks to cover you in any situation
           </p>
-          <button className="mt-8 px-8 py-3 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-semibold rounded-lg shadow-lg hover:scale-105 transform transition-transform">
+          <button className="mt-8 px-8 py-3 bg-pcd-gradient-accent text-white font-semibold rounded-lg shadow-lg hover:scale-105 transform transition-transform">
             Get started
           </button>
         </div>
@@ -49,7 +49,7 @@ const FeatureGridSection = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
             {features.map((feature) => (
               <div key={feature.title}>
-                <div className="flex items-center justify-center h-16 w-16 rounded-lg bg-gradient-to-r from-blue-500 to-cyan-500 text-white">
+                <div className="flex items-center justify-center h-16 w-16 rounded-lg bg-pcd-gradient-accent text-white">
                   <RemixIcon name={feature.icon} className="text-4xl" />
                 </div>
                 <h3 className="mt-4 text-xl font-semibold text-gray-900">{feature.title}</h3>

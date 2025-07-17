@@ -18,47 +18,58 @@
   --pcd-pink-light: #FDF2F8;
   --pcd-orange-light: #FFF7ED;
 
-  /* Typography */
-  --font-scale: 1;
-
   /* Theming Accent Colors */
   --pcd-accent-color: var(--pcd-blue);
   --pcd-accent-light-color: var(--pcd-blue-light);
-}
 
-html {
-  font-size: calc(100% * var(--font-scale));
+  /* Theming Gradients */
+  --pcd-gradient-main: linear-gradient(to bottom right, var(--pcd-blue), var(--pcd-roxo), #14b8a6);
+  --pcd-gradient-accent: linear-gradient(to right, var(--pcd-blue), var(--pcd-roxo));
 }
 
 .theme-purple {
   --pcd-accent-color: var(--pcd-roxo);
   --pcd-accent-light-color: var(--pcd-roxo-light);
+  --pcd-gradient-main: linear-gradient(to bottom right, var(--pcd-roxo), var(--pcd-pink), var(--pcd-orange));
+  --pcd-gradient-accent: linear-gradient(to right, var(--pcd-roxo), var(--pcd-pink));
 }
 .theme-green {
   --pcd-accent-color: var(--pcd-green);
   --pcd-accent-light-color: var(--pcd-green-light);
+  --pcd-gradient-main: linear-gradient(to bottom right, var(--pcd-green), #22c55e, #a3e635);
+  --pcd-gradient-accent: linear-gradient(to right, var(--pcd-green), #22c55e);
 }
 .theme-pink {
   --pcd-accent-color: var(--pcd-pink);
   --pcd-accent-light-color: var(--pcd-pink-light);
+  --pcd-gradient-main: linear-gradient(to bottom right, var(--pcd-pink), #f43f5e, var(--pcd-orange));
+  --pcd-gradient-accent: linear-gradient(to right, var(--pcd-pink), #f43f5e);
 }
 .theme-orange {
   --pcd-accent-color: var(--pcd-orange);
   --pcd-accent-light-color: var(--pcd-orange-light);
+  --pcd-gradient-main: linear-gradient(to bottom right, var(--pcd-orange), #ef4444, var(--pcd-pink));
+  --pcd-gradient-accent: linear-gradient(to right, var(--pcd-orange), #ef4444);
 }
 .theme-blue {
   --pcd-accent-color: var(--pcd-blue);
   --pcd-accent-light-color: var(--pcd-blue-light);
+  --pcd-gradient-main: linear-gradient(to bottom right, var(--pcd-blue), var(--pcd-roxo), #14b8a6);
+  --pcd-gradient-accent: linear-gradient(to right, var(--pcd-blue), var(--pcd-roxo));
 }
 
 
 body {
   font-family: 'Inter', sans-serif;
   scroll-behavior: smooth;
-  font-size: 1.125rem;
-  line-height: 1.6;
   background-color: var(--pcd-page-bg);
 }
+
+/* Added to account for sticky header height on scroll-into-view */
+.course-group {
+  scroll-margin-top: 5rem; /* 80px */
+}
+
 .animated-section {
   opacity: 0;
   transform: translateY(20px);
@@ -214,24 +225,23 @@ section > .container {
     color: var(--pcd-text-dark);
     margin-bottom: 1rem;
 }
-.markdown-content h1 {
-    font-size: 1.75rem;
-    line-height: 2.25rem;
-    margin-top: 1.5rem;
-}
-.markdown-content h2 {
+.markdown-content h1 { 
     font-size: 1.5rem;
     line-height: 2rem;
+    margin-top: 1.5rem; 
+}
+.markdown-content h2 { 
+    font-size: 1.25rem;
+    line-height: 1.75rem;
     margin-top: 1.25rem;
 }
-.markdown-content h3 {
-    font-size: 1.25rem;
-    line-height: 1.875rem;
+.markdown-content h3 { 
+    font-size: 1.125rem;
+    line-height: 1.75rem;
     margin-top: 1rem;
 }
-.markdown-content p {
-    margin-bottom: 1rem;
-    line-height: 1.6;
+.markdown-content p { 
+    margin-bottom: 1rem; 
 }
 .markdown-content ul,
 .markdown-content ol { 
@@ -245,9 +255,8 @@ section > .container {
 .markdown-content ol { 
     list-style-type: decimal; 
 }
-.markdown-content li {
-    margin-bottom: 0.5rem;
-    line-height: 1.6;
+.markdown-content li { 
+    margin-bottom: 0.5rem; 
 }
 .markdown-content strong { 
     font-weight: 600; 
@@ -353,7 +362,7 @@ section > .container {
 
 .fizz-emoji {
   position: absolute;
-  animation: fizz-effect 1.2s ease-out forwards;
+  animation: fizz-effect 4s ease-out forwards;
   will-change: transform, opacity;
   opacity: 0;
 }
@@ -367,7 +376,7 @@ section > .container {
     opacity: 1;
   }
   100% {
-    transform: translateY(calc(-80% + var(--random-y, 0) * 1px)) scale(1.2);
+    transform: translateY(calc(-150% + var(--random-y, 0) * 1px)) scale(1.2);
     opacity: 0;
   }
 }
@@ -398,4 +407,25 @@ section > .container {
 .interactive-card:hover .overlay-content {
   transform: translateY(0);
   opacity: 1;
+}
+
+/* Gentle Floating Shapes Animation */
+@keyframes gentle-float {
+  0% { transform: translateY(0px) rotate(0deg) scale(1); }
+  50% { transform: translateY(-30px) rotate(180deg) scale(1.05); }
+  100% { transform: translateY(0px) rotate(360deg) scale(1); }
+}
+
+@keyframes gentle-float-2 {
+  0% { transform: translateY(0px) rotate(0deg) scale(1); }
+  50% { transform: translateY(20px) rotate(-150deg) scale(0.95); }
+  100% { transform: translateY(0px) rotate(-360deg) scale(1); }
+}
+
+.shape-float-1 {
+  animation: gentle-float 25s ease-in-out infinite;
+}
+
+.shape-float-2 {
+  animation: gentle-float-2 30s ease-in-out infinite;
 }

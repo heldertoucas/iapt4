@@ -7,7 +7,7 @@ import RemixIcon from '../ui/RemixIcon';
 
 const CopilotCourseHero = () => {
     return (
-        <section className="relative py-24 md:py-32 bg-gradient-to-br from-blue-50 to-green-50 border-b border-pcd-border">
+        <section className="relative py-24 md:py-32 bg-gradient-to-br from-pcd-accent-light/30 to-pcd-bg-soft border-b border-pcd-border">
              <div className="absolute top-0 right-0 h-full w-full opacity-30" style={{backgroundImage: 'radial-gradient(var(--pcd-border) 1px, transparent 1px)', backgroundSize: '16px 16px'}}></div>
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
                 <div className="inline-block bg-pcd-accent-light p-4 rounded-2xl mb-6">

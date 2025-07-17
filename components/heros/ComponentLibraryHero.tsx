@@ -6,7 +6,7 @@ import React from 'react';
 import RemixIcon from '../ui/RemixIcon';
 
 const ComponentLibraryHero = () => (
-    <section className="relative py-24 md:py-32 bg-gradient-to-br from-pcd-pink/20 to-pcd-orange/10 border-b border-pcd-border overflow-hidden">
+    <section className="relative py-24 md:py-32 bg-gradient-to-br from-pcd-accent/20 to-pcd-orange-light/50 border-b border-pcd-border overflow-hidden">
         <div className="absolute top-0 right-0 -z-0">
             <RemixIcon name="tools-fill" className="text-[300px] text-pcd-pink/10 -rotate-12 translate-x-1/4 translate-y-1/4" />
         </div>

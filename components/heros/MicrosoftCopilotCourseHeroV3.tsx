@@ -7,7 +7,7 @@ import CopilotHeroV3Illustration from '../illustrations/CopilotHeroV3Illustratio
 
 const MicrosoftCopilotCourseHeroV3 = () => {
     return (
-        <section className="relative bg-[#F9FFFD] text-pcd-text-dark py-20 md:py-32 overflow-hidden">
+        <section className="relative bg-gradient-to-br from-pcd-accent-light/20 to-pcd-page-bg text-pcd-text-dark py-20 md:py-32 overflow-hidden">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="grid md:grid-cols-2 gap-x-16 gap-y-12 items-center">
                     {/* Left Column: Text and CTAs */}
@@ -24,7 +24,7 @@ const MicrosoftCopilotCourseHeroV3 = () => {
                         <div className="mt-10">
                             <a 
                                 href="#blocos" 
-                                className="px-8 py-3 bg-pcd-accent text-white rounded-full font-semibold hover:bg-opacity-90 transition-all shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
+                                className="px-8 py-3 bg-pcd-accent text-white rounded-full font-semibold hover:bg-opacity-90 transition-all shadow-lg hover:shadow-2xl transform hover:-translate-y-1"
                             >
                                 Começar o Curso
                             </a>

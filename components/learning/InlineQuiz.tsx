@@ -3,9 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 import React, { useState } from 'react';
-
-// TypeScript declaration for the confetti library
-declare const confetti: (options: any) => void;
+import RemixIcon from '../ui/RemixIcon';
 
 type QuizOption = {
     text: string;
@@ -21,26 +19,34 @@ type InlineQuizProps = {
 };
 
 const InlineQuiz = ({ question, options, correctFeedback, incorrectFeedback, onAnswer }: InlineQuizProps) => {
+    const [selectedOption, setSelectedOption] = useState<number | null>(null);
     const [feedback, setFeedback] = useState<string | null>(null);
     const [isAnswered, setIsAnswered] = useState(false);
 
-    const handleOptionClick = (isCorrect: boolean) => {
+    const handleOptionClick = (isCorrect: boolean, index: number) => {
         if (isAnswered) return;
 
+        setSelectedOption(index);
         if (isCorrect) {
             setFeedback(correctFeedback);
-            if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 100,
-                    spread: 70,
-                    origin: { y: 0.6 }
-                });
-            }
         } else {
             setFeedback(incorrectFeedback);
         }
         setIsAnswered(true);
         onAnswer?.();
+    };
+
+    const getOptionClass = (index: number) => {
+        if (!isAnswered) {
+            return 'bg-pcd-bg-soft border-pcd-border hover:border-pcd-accent hover:bg-pcd-accent-light';
+        }
+        if (options[index].isCorrect) {
+            return 'bg-green-100 border-green-400 ring-2 ring-green-200';
+        }
+        if (index === selectedOption && !options[index].isCorrect) {
+            return 'bg-red-100 border-red-400 ring-2 ring-red-200';
+        }
+        return 'bg-gray-50 border-gray-200 opacity-60 cursor-not-allowed';
     };
 
     const getFeedbackClass = () => {
@@ -51,12 +57,12 @@ const InlineQuiz = ({ question, options, correctFeedback, incorrectFeedback, onA
     return (
         <div>
             <p className="text-lg text-pcd-text-light leading-relaxed font-semibold">{question}</p>
-            <div id="quiz-options" className={`mt-6 space-y-4 ${isAnswered ? 'pointer-events-none' : ''}`}>
+            <div id="quiz-options" className={`mt-6 space-y-4`}>
                 {options.map((option, index) => (
                     <button
                         key={index}
-                        onClick={() => handleOptionClick(option.isCorrect)}
-                        className="quiz-option w-full text-left p-4 bg-pcd-bg-soft border-2 border-pcd-border rounded-lg hover:border-pcd-blue hover:bg-pcd-blue-light transition disabled:opacity-70 text-pcd-text-dark"
+                        onClick={() => handleOptionClick(option.isCorrect, index)}
+                        className={`quiz-option w-full text-left p-4 border-2 rounded-lg transition text-base ${getOptionClass(index)} text-pcd-text-dark`}
                         disabled={isAnswered}
                     >
                         {option.text}
@@ -64,7 +70,7 @@ const InlineQuiz = ({ question, options, correctFeedback, incorrectFeedback, onA
                 ))}
             </div>
             {feedback && (
-                <p id="quiz-feedback" className={`mt-4 font-semibold ${getFeedbackClass()}`}>
+                <p id="quiz-feedback" className={`mt-4 font-semibold text-base ${getFeedbackClass()}`}>
                     {feedback}
                 </p>
             )}

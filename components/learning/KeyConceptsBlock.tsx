@@ -18,8 +18,8 @@ const KeyConceptsBlock = () => {
     ];
 
     return (
-        <div className="mt-4 space-y-3">
-            <div className="mb-6 flex justify-center">
+        <div className="mt-4 space-y-4">
+            <div className="mb-8 flex justify-center">
                 <ElearningIllustration name="learning" className="w-full max-w-xs h-auto text-pcd-accent" />
             </div>
             {concepts.map((concept, index) => (
@@ -28,7 +28,7 @@ const KeyConceptsBlock = () => {
                         {concept.title}
                         <span className="text-2xl font-light transform transition-transform group-open:rotate-45">+</span>
                     </summary>
-                    <p className="mt-2 text-pcd-text-light pt-2 border-t border-pcd-border">
+                    <p className="mt-4 text-base text-pcd-text-light pt-4 border-t border-pcd-border">
                         {concept.content}
                     </p>
                 </details>

@@ -24,13 +24,6 @@ interface AppConfig {
     useStudioNav: boolean;
 
     /**
-     * Global typography scale (1-10)
-     * A value of 3 represents the default size. Values above or below
-     * 3 will adjust the base font size in small increments.
-     */
-    fontScale: number;
-
-    /**
      * Page-specific Theming
      * Assigns a color theme to each sub-page. The theme class will be applied
      * to the root element of the page.
@@ -61,8 +54,7 @@ interface AppConfig {
 
 export const appConfig: AppConfig = {
     // --- GENERAL SETTINGS ---
-    useStudioNav: false, // <-- SET TO false FOR PRODUCTION
-    fontScale: 2,
+    useStudioNav: true, // <-- SET TO false FOR PRODUCTION
 
     // --- PAGE THEMES ---
     pageThemes: {
@@ -70,9 +62,6 @@ export const appConfig: AppConfig = {
         '#/home-archive': 'theme-pink',
         '#/manifesto-cocreate': 'theme-purple',
         '#/prompt-factory': 'theme-purple',
-        '#/copilot-course': 'theme-green',
-        '#/mscopilot-course': 'theme-blue',
-        '#/mscopilot-course-v2': 'theme-orange',
         '#/mscopilot-course-v3': 'theme-green',
         '#/component-library': 'theme-pink',
     },
@@ -83,6 +72,7 @@ export const appConfig: AppConfig = {
         showElearningShowcase: true,
         showGamificationSection: true,
         enableManifestoCoCreation: true,
-        useGamificationSidebar: true,        enableComponentLibrary: true,
+        useGamificationSidebar: true,
+        enableComponentLibrary: true,
     }
 };

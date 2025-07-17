@@ -89,28 +89,3 @@ git push
 6.  **Deploy:** Clique no botão **Deploy**.
 
 A Vercel irá agora construir e implementar a sua aplicação. A partir deste ponto, cada `git push` para a sua branch principal irá acionar automaticamente um novo deploy.
-
----
-
-## Passo 4: Verificar Dependências do `package.json`
-
-Um erro comum durante o build na Vercel é a presença de nomes de pacotes inválidos no `package.json`. Antes de fazer o push final:
-
-1. Abra o ficheiro `package.json` e confirme que todas as dependências têm nomes válidos (apenas caracteres URL-friendly).
-2. Se encontrar entradas suspeitas, como `"react-dom/client"`, remova-as ou corrija-as. O nome do pacote deve ser apenas `"react-dom"`.
-3. Execute `npm install` localmente para validar que o ficheiro está correto.
-
-Esta verificação simples evita falhas no `npm install` durante o deploy e poupa tempo de troubleshooting.
-
----
-
-## Passo 5: Validar o Build Localmente
-
-Erros de build, como tags JSX mal fechadas, apenas surgem durante a compilação com o Vite. Antes de enviar alterações para o GitHub:
-
-1. Execute `npm run build` no seu ambiente local.
-2. Corrija qualquer erro de sintaxe ou JSX que seja reportado.
-3. Depois de um build bem-sucedido, faça o push para a sua branch.
-
-Seguir este passo evita falhas de deploy na Vercel causadas por problemas de marcação nos componentes React.
-

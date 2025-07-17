@@ -23,20 +23,20 @@ const PromptExamplesBlock = () => {
     return (
         <div>
             <p className="text-lg text-pcd-text-light leading-relaxed">Muitas vezes, o mais difícil é começar. Para que serve um assistente destes? Explore alguns exemplos de pedidos (prompts) que mostram a sua versatilidade.</p>
-            <div className="mt-6 space-y-3">
+            <div className="mt-6 space-y-4">
                 {prompts.map((prompt, index) => (
                      <details key={index} className="group bg-pcd-bg-soft p-4 rounded-lg cursor-pointer">
                         <summary className="flex items-center justify-between font-semibold text-pcd-text-dark list-none">
                             {prompt.title}
                             <span className="text-2xl font-light transform transition-transform group-open:rotate-45">+</span>
                         </summary>
-                        <p className="mt-2 text-pcd-text-light pt-2 border-t border-pcd-border">
+                        <p className="mt-4 text-base text-pcd-text-light pt-4 border-t border-pcd-border">
                             {prompt.content}
                         </p>
                     </details>
                 ))}
             </div>
-            <div className="mt-6">
+            <div className="mt-8">
                 <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center bg-pcd-accent text-white font-semibold py-2 px-5 rounded-lg hover:bg-opacity-90 transition">
                     Abrir a IA Gemini ↗
                 </a>

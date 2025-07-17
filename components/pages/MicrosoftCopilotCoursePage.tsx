@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
 */
 import React, { useState, useEffect, useRef } from 'react';
-import AppHeader from '../layout/AppHeader';
+import Header from '../Header';
 import AppFooter from '../layout/AppFooter';
 import LearningUnitLayout from '../learning/LearningUnitLayout';
 import MissionBlock, { MissionCategory } from '../learning/MissionBlock';
@@ -232,7 +232,7 @@ const CourseSidebar = ({ points, unlockedBlocks, learningBlocks, displayMode = '
 };
 
 
-const MicrosoftCopilotCoursePage = ({ navigateTo }: PageProps) => {
+const MicrosoftCopilotCoursePage = ({ navigateTo, pages, activePath }: PageProps) => {
     const navLinks = [ { href: "#blocos", label: "Blocos do Curso" } ];
     const { points, addPoint, goal } = useCopilotCourseGamification();
     const [unlockedBlocks, setUnlockedBlocks] = useState(1);
@@ -425,7 +425,13 @@ const MicrosoftCopilotCoursePage = ({ navigateTo }: PageProps) => {
     
     return (
         <div className="bg-pcd-page-bg">
-            <AppHeader navigateTo={navigateTo!} title="Curso: MS Copilot" navLinks={navLinks} />
+            <Header
+                pageTitle="Curso: MS Copilot"
+                navLinks={navLinks}
+                navigateTo={navigateTo}
+                pages={pages}
+                activePath={activePath}
+            />
             <main>
                 <MicrosoftCopilotCourseHero />
                 <section id="blocos" className="bg-pcd-page-bg py-20">

@@ -39,7 +39,7 @@ const PromptFactoryHero = ({ onStart }: PromptFactoryHeroProps) => {
     }, [content]);
 
     return (
-        <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-pcd-roxo via-pcd-pink to-pcd-orange border-b border-pcd-border overflow-hidden">
+        <section className="relative h-screen flex items-center justify-center bg-pcd-gradient-main border-b border-pcd-border overflow-hidden">
             <div className="absolute inset-0 z-0">
                 {floatingEmojis.map(emoji => (
                     <span

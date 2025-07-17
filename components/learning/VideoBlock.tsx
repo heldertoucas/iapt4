@@ -23,8 +23,8 @@ const VideoBlock = ({ videoId }: VideoBlockProps) => {
                     ></iframe>
                 </div>
             </div>
-            <div className="text-right mt-2">
-                <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" rel="noopener noreferrer" className="text-sm text-pcd-blue hover:underline">
+            <div className="text-right mt-3">
+                <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" rel="noopener noreferrer" className="text-base text-pcd-blue hover:underline">
                     Ver em ecrã inteiro ↗
                 </a>
             </div>

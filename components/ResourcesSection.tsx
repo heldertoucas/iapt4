@@ -16,15 +16,6 @@ type ResourcesSectionProps = {
 const ResourcesSection = ({ navigateTo }: ResourcesSectionProps) => {
     const resources = [
         {
-            icon: "book-line",
-            title: "Fundamentos de IA: Curso rápido ✨Descobrir a IA",
-            description: "Domine os conceitos centrais de IA. Cobrimos tudo, desde algoritmos fundamentais e o papel dos dados na IA até às distinções entre IA Restrita, IA Geral e Superinteligência. Explore percursos de aprendizagem para iniciantes e para quem procura atualizar os seus conhecimentos.",
-            topics: ["Modelos de Aprendizagem Automática", "Arquiteturas de Redes Neuronais", "Pré-processamento de Dados", "Fundamentos de Processamento de Linguagem Natural"],
-            buttonText: "Inscrever-se no Curso ✨Descobrir a IA",
-            href: "#/mscopilot-course-v3",
-            disabled: false,
-        },
-        {
             icon: "file-text-line",
             title: "IA de Iniciante a Avançado: Certificação IA para Todos",
             description: "Aprofunde as dimensões éticas críticas da IA. Compreenda como podem surgir preconceitos, a importância da transparência na tomada de decisões por IA e estruturas para construir sistemas de IA responsáveis. Exploramos estudos de caso do mundo real e debates em curso.",

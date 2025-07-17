@@ -98,7 +98,5 @@ ia-para-todos/
 ├── .env.local
 ├── index.html
 ├── package.json
-└── README.md```
-## Acessibilidade e UDL
-
-Esta aplicação segue boas práticas de acessibilidade e o Universal Design for Learning. Consulte o documento [docs/ACCESSIBILITY_GUIDE.md](docs/ACCESSIBILITY_GUIDE.md) para mais detalhes e recomendações.
+└── README.md
+```
